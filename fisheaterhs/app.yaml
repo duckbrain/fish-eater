@@ -1,0 +1,29 @@
+application: fisheaterhs
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /favicon.ico
+  static_files: static/favicon.png
+  upload: static/favicon.png
+
+- url: /settings.js
+  static_files: static/settings.js
+  upload: static/settings.js
+
+- url: /options.html
+  static_files: static/options.html
+  upload: static/options.html
+
+- url: /icon_128.png
+  static_files: static/icon_128.png
+  upload: static/icon_128.png
+
+- url: /FishEater.html
+  static_files: static/FishEater.html
+  upload: static/FishEater.html
+
+
+- url: .*
+  script: main.py

@@ -1,0 +1,57 @@
+<html manifest="fisheater.appcache">
+<head>
+    <title>FishEater by Jonathan Duck</title>
+    <script type="text/javascript" src="settings.js"></script>
+	<style type="text/css">
+		body
+		{
+			display: -webkit-box;
+			-webkit-box-orient: horizontal;
+			-webkit-box-pack: center;
+			-webkit-box-align: center;
+		}
+		a:visited
+		{
+			color:blue;
+		}
+		#highscore:before
+		{
+			content: "High Score:";
+			margin-right: 4px;
+		}
+
+		.black { background-color: black; color: white; }
+		.black a { color: lightblue; }
+	</style>
+</head>
+<body onkeydown="page_keydown" onkeyup="page_keyup">
+    <center>
+        <script type="text/javascript" src="fisheater.js"></script>
+        <canvas onmousedown="page_mousedown" onmouseup="page_mouseup" id="canvas" width="750" height="566" style="width: 750; height: 566; margin: 0px;
+            padding: 0px; background-color: lightblue; text-align: center;">
+        Your browser does not support the canvas element. To play the game you will need a browser that follows HTML5 web standards. I recommend <a href="http://chrome.google.com">Google Chrome</a>, but <a href="http://www.firefox.com">Mozilla Firefox</a> is another popular browser that supports the canvas element.
+    </canvas>
+		<table style="width: 750px;">
+			<tr>
+				<td style="text-align:left;">
+					<a href="javascript:TogglePause()">Pause</a>
+					<a href="javascript:RestartGame()">Restart</a>
+					&nbsp;
+					<span style="display: none;">
+						<input id="mousebox" type="checkbox">
+						<label for="mousebox">Mouse Control</label>
+					</span>
+				</td>
+				<td style="text-align:center;">
+					<span id="highscore"></span>
+				</td>
+				<td style="text-align:right;">
+					<a href="options.html#instructions">How to Play</a>
+				</td>
+			</tr>
+		</table>
+    </center>
+
+    <script type="text/javascript" src="startgame.js"></script>
+</body>
+</html>

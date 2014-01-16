@@ -1,0 +1,13 @@
+<HTML>
+<head>
+<title>Fish Eater - High Scores</title>
+</head>
+<body>
+	<h1>Fish Eater - High Scores</h1>
+	<p>
+		{% for highscore in highscores %}
+		<div>{{highscore.score}} - {{highscore.name}}</div>
+		{% endfor %}
+	</p>
+</body>
+</HTML>

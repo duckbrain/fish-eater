@@ -1,0 +1,16 @@
+{
+  "name": "Fish Eater",
+  "description": "A simple game featuring fish, where you must eat the smaller fish to become big and rule the pond.",
+  "version": "3.5.1",
+  "app": {
+    "launch": {
+      "local_path": "index.html"
+    }
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "128": "icon_128.png"
+  },
+  "options_page": "options.html",
+  "manifest_version": 2
+}

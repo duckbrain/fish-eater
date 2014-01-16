@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Fish Eater - Options</title>
+<style type="text/css">
+	 .notavailable
+	 {
+		 display:none;
+	}
+	a:visited {
+		color:blue;
+}
+</style>
+</head>
+<script type="text/javascript" src="settings.js"></script>
+<script type="text/javascript" src="jscolor/jscolor.js"></script>
+<script type="text/javascript">
+function colorSet(o) {
+	SetColor(o.id, o.value);
+}
+function optionSet(o) {
+	SetOption(o.id, o.checked);
+}
+</script>
+<body>
+
+	<a href="FishEater.html"><img alt="Fish Eater Icon" src="icon_128.png" align="left"></a>
+<h1>&nbsp;Fish Eater - Options and Instructions</h1>
+<p>&nbsp;&nbsp;&nbsp;This is where you can set the options for Fish Eater, view about information, and instructions on how to play the game.</p>
+<p>&nbsp;&nbsp;&nbsp;Fish Eater was brought to you by Jonathan Duck.</p>
+<a href="FishEater.html" style="margin-left:7px;">Back to the Game</a>
+<p><a target="top" href="https://www.facebook.com/apps/application.php?id=170456592985067"><img alt="Facebook Logo" src="facebook.png">Like us on Facebook!</a></p>
+<h1 id="instructions">Instructions</h1>
+<p>
+In Fish Eater you play as a little fish in a big pond. You must become the best by becoming the biggest.
+Fish Eater is mainly played by using either the arrow keys or the W, A, S, and D keys.
+You may use the keys to move in any direction in the water. Your goal is simple: eat
+smaller fish to become bigger. Fish are colored according to if you may eat them or not.
+</p>
+<p>The colorings are as follows.</p>
+<ul>
+<li><span style="color: green;">Green</span>: These fish can be eaten to make you bigger and give you health.</li>
+<li><span style="color: purple;">Purple</span>: These fish can be eaten to make you bigger, give you health, and give you a temporary power-up. More on power-ups later</li>
+<li><span style="color: red;">Red</span>: These fish can <strong>not</strong> be eaten to make you bigger and will take away health if you touch them.</li>
+</ul>
+<p>
+To eat a fish, you simply run into it's body with your body. Tails have no effect when touched.
+</p>
+<p>The power-ups are as follows.</p>
+<ul>
+<li>Fly: This will let you soar through the air as if it was water.</li>
+<li>Fast: They can't eat you if you can accelerate away from them twice as fast and effortlessly jump of the screen.</li>
+<li>Control Song: This eiree song will let the smart ones still stare you down, but their bodies are not under their control.</li>
+<li>Invincibility: This power-up will let you swim right by the big red fish.</li>
+<li>Time Stop: Time stop is most convinient when you are excluded.</li>
+<li>Spawn: Nothing like a small snack to prepare you for the big meal.</li>
+<li>Pac-man: No fish is safe from your hunger.</li>
+<li>Super: This is the ultimate power-up, but can you make it last long enough?</li>
+</ul>
+<p>
+<h1 id="settings">Options</h1>
+<p class="notavailable">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Game Version:
+Changes affect game-play rules, not appearance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select id="version" disabled="disabled">
+	<option>Version 1</option>
+	<option>Version 2</option>
+	<option selected>Version 3</option>
+</select>
+<br></p>
+<p>
+	Background Color:
+	<input id="black" type="checkbox" name="background" value="black" onclick="optionSet(this);"/>
+	<label for="black">Black Background</label>
+</p>
+<div class="notavailable">
+	<h2>Color Options</h2>
+	<h3>&nbsp;&nbsp;&nbsp;Fish Colors</h3>
+	<p style="color:gray" disabled="disabled">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your color: <input id="yourcolor" class="color" value="FFFF00" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edible Fish color: <input id="ediblecolor" class="color" value="00DD00" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Power-up Fish color: <input id="powerupcolor" class="color" value="FFFF00" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enemy Fish color: <input id="enemycolor" class="color" value="FF0000" onchange="colorSet(this);"><br>
+	</p>
+	<h3>&nbsp;&nbsp;&nbsp;Environment Colors</h3>
+	<p style="color:gray" disabled="disabled">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Water (normal) color: <input id="watercolorn" class="color" value="FFFF00" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Water (hurting) color: <input id="watercolorh" class="color" value="FF0000" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Background color: <input id="backcolor" class="color" value="FFFF00" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sun color: <input id="suncolor" class="color" value="FFFF00" onchange="colorSet(this);"><br>
+	</p>
+	<h3>&nbsp;&nbsp;&nbsp;Interface Colors</h3>
+	<p style="color:gray" disabled="disabled">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Page Background color: <input id="pagecolor" class="color" value="FFFFFF" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Panel Background color: <input id="panelcolor" class="color" value="333333" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Panel Text color: <input id="paneltcolor" class="color" value="000000" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Health Bar color: <input id="healthbarcolor" class="color" value="0000FF" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Power-up Bar color: <input id="powerupbarcolor" class="color" value="FF0000" onchange="colorSet(this);"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pause Message color: <input id="messagecolor" class="color" value="000000" onchange="colorSet(this);"><br>
+	</p>
+</div>
+<div class="notavailable">
+<h2>Sound Options</h2>
+	<h3>Power-up Music</h3>
+	<p disabled="disabled" style="color: gray;">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fly music: <input id="flymusic" type="text" value=""><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fast music: <input id="fastmusic" type="text" value=""><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time-stop music: <input id="timemusic" type="text" value=""><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Control Song music: <input id="songmusic" type="text" value=""><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Heal music: <input id="healmusic" type="text" value=""><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invincibility music: <input id="invincability" type="text" value=""><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pac-man music: <input id="pacmanmusic" type="text" value=""><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Super music: <input id="supermusic" type="text" value=""><br>
+	</p>
+</div>
+<h2>Fish Options</h2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="noEyes" onclick="optionSet(this);"><label for="noEyes">Hide Eyes</label><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="noOutline" onclick="optionSet(this);"><label for="noOutline">Hide Outlines</label><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="noPUEffects" disabled="disabled" onclick="optionSet(this);"><label style="color:gray;" for="noPUEffects">Disable Power-up Effects</label><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="PUIcons" disabled="disabled" onclick="optionSet(this);"><label style="color:gray;" for="PUIcons">Show Classic Power-up Icons</label><br>
+</body>
+<div class="notavailable">
+<h2>Keys</h2>
+<p disabled="disabled" style="color: gray;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Up key: <input type="text" value=""><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Down key: <input type="text" value=""><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left key: <input type="text" value=""><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right key: <input type="text" value=""><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminate Power-up key: <input type="text" value=""><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restart Game key: <input type="text" value=""><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pause key: <input type="text" value=""><br>
+</p>
+</div>
+<script type="text/javascript">
+function loadColor(id) {
+	document.getElementById(id).value = GetColor(id);
+}
+function loadOption(id) {
+	document.getElementById(id).checked = GetOption(id);
+}
+
+function loadSettings() {
+	loadColor('yourcolor');
+	loadColor('ediblecolor');
+	loadColor('powerupcolor');
+	loadColor('enemycolor');
+	loadColor('watercolorn');
+	loadColor('watercolorh');
+	loadColor('backcolor');
+	loadColor('suncolor');
+	loadColor('pagecolor');
+	loadColor('panelcolor');
+	loadColor('paneltcolor');
+	loadColor('healthbarcolor');
+	loadColor('powerupbarcolor');
+	loadColor('messagecolor');
+
+	loadOption('noEyes');
+	loadOption('noOutline');
+	loadOption('noPUEffects');
+	loadOption('PUIcons');
+	loadOption('black');
+}
+
+loadSettings();
+</script>
+</html>
