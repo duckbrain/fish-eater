@@ -1,0 +1,21 @@
+CACHE MANIFEST
+#VERSION 3
+index.html
+options.html
+fisheater.js
+settings.js
+startgame.js
+icon_16.png
+icon_128.png
+media/background.mp3
+media/fast.mp3
+media/fly.mp3
+media/heal.mp3
+media/invincable.mp3
+media/loose.mp3
+media/pacman.mp3
+media/song.mp3
+media/spawn.mp3
+media/super.mp3
+media/timestop.mp3
+media/win.mp3

@@ -1,0 +1,304 @@
+// Powerup array
+
+/*
+	"PacMan": 2,
+	"TimeStop": 3,
+	"Spawn": 4,
+*/
+
+//
+// PowerUp Constructor
+//
+function PowerUp(displayText, mp3, timeLimit, functionName, newFunction, increment) {
+	this.displayText = displayText;
+	this.mp3 = mp3;
+	this.timeLimit = timeLimit;
+	this[functionName] = newFunction || function() { };
+	if (typeof (functionName) == 'string')
+		this.functionName = [ functionName ];
+	else if (!functionName)
+		this.functionName = [];
+	else 
+		this.functionName = functionName;
+		
+	this.init = function(fish) {
+		if (this.functionName.length) {
+			for (var i in this.functionName) {
+				fish['__old_' + this.functionName[i]] = fish[this.functionName[i]];
+				fish[this.functionName[i]] = this[this.functionName[i]];
+			}
+		}
+	};
+	this.deinit = function(fish) {
+		if (this.functionName.length) {
+			for (var i in this.functionName) {
+				fish[this.functionName[i]] = fish['__old_' + this.functionName[i]];
+				delete fish['__old_' + this.functionName[i]];
+			}
+		}
+	};
+	this.increment = increment || function() { };
+}
+PowerUp.prototype = {
+	init: function(fish) {
+		if (this.functionName.length) {
+			for (var i in this.functionName)
+				fish['__old_' + this.functionName[i]] = fish[this.functionName[i]];
+				fish[this.functionName[i]] = this[this.functionName[i]];
+		}
+	},
+	deinit: function(fish) {
+		if (this.functionName.length) {
+			for (var i in this.functionName) {
+				fish[this.functionName[i]] = fish['__old_' + this.functionName[i]];
+				delete fish['__old_' + this.functionName[i]];
+			}
+		}
+	},
+	increment: function() { }
+}
+
+//
+// Fly Powerup
+//
+function FlyPowerUp() {
+	this.tick = 0;
+	this.tickSpeed = 0.7;
+}
+FlyPowerUp.prototype = new PowerUp("Fly", "fly.mp3", 600, ["isInWater", "drawTail"]);
+FlyPowerUp.prototype.isInWater = function() { return true; };
+FlyPowerUp.prototype.drawTail = function(ctx) {
+	var a, b;
+	var mod = Math.sin(this.powerup.tick);
+	var x, c1, c2;
+	c1 = this.y - this.size * mod / 2;
+	c2 = this.y + this.size * mod / 2;
+	if (this.facingRight)
+		x = this.x - this.size;
+	else
+		x = this.x + this.size;
+	a = game.transform(x, c1);
+	b = game.transform(x, c2);
+	ctx.lineTo(a.x, a.y);
+	ctx.lineTo(b.x, b.y);
+};
+FlyPowerUp.prototype.increment = function(fish) {
+	this.tick += this.tickSpeed;
+}
+
+//
+// Heal Powerup
+//
+function HealPowerUp() {
+	this.tick = 0;
+	this.tickSpeed = .3;
+	this.color = new Color(255, 255, 0);
+	this.hsv = {};
+}
+HealPowerUp.prototype = new PowerUp("Heal", "heal.mp3", 50, 'getColor');
+HealPowerUp.prototype.init = function(fish) {
+	PowerUp.prototype.init.call(this, fish);
+	// TODO Get Fish color and set it
+	this.hsv = this.color.getHSV();
+};
+HealPowerUp.prototype.getColor = function() {
+	var hsv = this.powerup.hsv;
+	hsv.s = Math.abs(Math.cos(this.powerup.tick));
+	this.powerup.color.setHSV(hsv.h, hsv.s, hsv.v);
+	return this.powerup.color.toString();
+};
+HealPowerUp.prototype.increment = function(fish) { 
+
+	fish.health = Math.min(fish.health + 1, game.maxHealth);
+	this.tick += this.tickSpeed;
+};
+
+//
+// Fast Powerup
+//
+function FastPowerUp() {
+	this.ratio = 1.5
+}
+FastPowerUp.prototype = new PowerUp("Fast", "fast.mp3", 600, ['speed', 'drawTail']);
+FastPowerUp.prototype.drawTail = function(ctx) {
+	var a, b;
+	if (this.facingRight) {
+		a = game.transform(this.x - this.size * 1.2, this.y - this.size / 3);
+		b = game.transform(this.x - this.size * 1.2, this.y + this.size / 3);
+	} else {
+		a = game.transform(this.x + this.size * 1.2, this.y - this.size / 3);
+		b = game.transform(this.x + this.size * 1.2, this.y + this.size / 3);
+	}
+	ctx.lineTo(a.x, a.y);
+	ctx.lineTo(b.x, b.y);
+};
+FastPowerUp.prototype.init = function(fish) {
+	PowerUp.prototype.init.call(this, fish);
+	fish.speed = fish.__old_speed * this.ratio;
+};
+
+//
+// Invincible Powerup
+//
+function InvinciblePowerUp() {
+	this.getColor = function() {
+		return ('#0' + Math.round(0xffffff * Math.random()).toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
+	};
+	this.distanceTo = function(f) {
+		if (this.edible(f))
+			return Fish.prototype.distanceTo.call(this, f);
+		else return NaN;
+	}
+	this.onCollision = function() { }
+}
+InvinciblePowerUp.prototype = new PowerUp("Invincible", "invincable.mp3", 500, ['getColor', 'distanceTo']);
+
+//
+// Song Powerup
+//
+function SongPowerUp() {
+	this.controller = {
+		speed: 1,
+		upSpeed: 0.5,
+		apply: function(fish) {
+			fish.velX = fish.facingRight ? this.speed : -this.speed;
+			fish.velY -= this.upSpeed;
+		},
+		init: function() {},
+		deinit: function() {}
+	};
+}
+SongPowerUp.prototype = new PowerUp("Control Song", "song.mp3", 300);
+SongPowerUp.prototype.init = function() {
+	var self = this;
+	//TODO: Update to new controller
+	game.enemyFishController.__old_apply = game.enemyFishController.apply;
+	game.enemyFishController.apply = this.applyController;
+};
+SongPowerUp.prototype.deinit = function() {
+	var self = this;
+	game.enemyFishController.apply = game.enemyFishController.__old_apply;
+	delete game.enemyFishController.__old_apply;
+};
+SongPowerUp.prototype.applyController = function(fish) {
+	fish.velY -= this.speedVert;
+	fish.velX = fish.facingRight ? fish.speed : -fish.speed;
+}
+
+//
+// PacMan Powerup
+//
+function PacManPowerUp() {
+	this.tick = 0;
+}
+PacManPowerUp.prototype = new PowerUp("PacMan", "pacman.mp3", 100, ["drawBody", "edible"]);
+PacManPowerUp.prototype.increment = function() {
+	++this.tick;
+};
+PacManPowerUp.prototype.init = function(fish) {
+	PowerUp.prototype.init.call(this, fish);
+	this.tick = 0;
+};
+PacManPowerUp.prototype.deinit = function(fish) {
+	PowerUp.prototype.deinit.call(this, fish);
+};
+PacManPowerUp.prototype.edible = function() {
+	return true;
+}
+PacManPowerUp.prototype.drawBody = function(ctx) {
+	var p = game.transform(this.x, this.y, this.size / 2);
+	var tick = Math.abs(Math.sin(this.powerup.tick / 5) / 2);
+	p.s = game.scale * this.size / 2
+	if (this.facingRight) {
+		p.w = tick;
+		p.h = Math.PI * 2 - tick;
+		p.b = false;
+		p.tailOffset = -this.size * game.scale;
+	}
+	else {
+		p.w = Math.PI - tick;
+		p.h = -Math.PI + tick;
+		p.b = true;
+		p.tailOffset = this.size * game.scale;
+	}
+	ctx.arc(p.x, p.y, p.s, p.w, p.h, p.b);
+	ctx.lineTo(p.x, p.y);
+	ctx.lineTo(p.x + Math.cos(p.w) * p.s, p.y + Math.sin(p.w) * p.s);
+	ctx.moveTo(p.x + p.tailOffset / 2, p.y);
+}
+
+TimeStopPowerUp = function() {}
+TimeStopPowerUp.prototype = new PowerUp("Time Stop", "timestop.mp3", 300);
+TimeStopPowerUp.prototype.init = function(fish) {
+	EnemyFish.prototype.__old_increment = EnemyFish.prototype.increment;
+	EnemyFish.prototype.increment = this.enemyIncrement;
+	var hsv = game.water.color.getHSV();
+	game.water.__old_color = {h:hsv.h, s:hsv.s, v:hsv.v};
+	hsv.s /= 2;
+	game.water.color.setHSV(hsv);
+	this.tick = 0;
+};
+TimeStopPowerUp.prototype.deinit = function(fish) {
+	EnemyFish.prototype.increment = EnemyFish.prototype.__old_increment;
+	delete EnemyFish.prototype.__old_increment;
+	game.water.color.setHSV(game.water.__old_color);
+	delete game.water.__old_color;
+};
+TimeStopPowerUp.prototype.enemyIncrement = function() {
+	
+}
+
+//
+// Super Powerup
+//
+function SuperPowerUp() {
+}
+SuperPowerUp.prototype = new PowerUp("Super", "super.mp3", 100, ["drawBody", "drawTail", "isInWater", "getColor"]);
+
+SuperPowerUp.prototype.drawTail = FlyPowerUp.prototype.drawTail;
+SuperPowerUp.prototype.isInWater = FlyPowerUp.prototype.isInWater;
+SuperPowerUp.prototype.drawBody = PacManPowerUp.prototype.drawBody;
+SuperPowerUp.prototype.getColor = InvinciblePowerUp.prototype.getColor;
+SuperPowerUp.prototype.drawBody = SuperPowerUp.prototype.drawBody;
+
+SuperPowerUp.prototype.init = function(fish) {
+	PowerUp.prototype.init.call(this, fish);
+};
+SuperPowerUp.prototype.deinit = function(fish) {
+	PowerUp.prototype.deinit.call(this, fish);
+};
+SuperPowerUp.prototype.increment = function(fish) {
+	var p = powerups.asArray();
+	for (var i = 0; i < p.length; ++i) {
+		if (p[i] != this)
+			p[i].increment(fish);
+	}
+};
+
+powerups = {
+	fly: new FlyPowerUp(),
+	heal: new HealPowerUp(),
+	super: new SuperPowerUp(),
+	fast: new FastPowerUp(),
+	invincible: new InvinciblePowerUp(),
+	song: new SongPowerUp(),
+	pacman: new PacManPowerUp(),
+	timestop: new TimeStopPowerUp(),
+	
+	asArray: function() {
+		var a = [];
+		for (var p in this)
+		{
+			p = this[p];
+			if (p instanceof PowerUp)
+				a.push(p);
+		}
+		return a;
+	},
+	
+	getRandomPowerup: function() {
+		var array = this.asArray();
+		var i = Math.floor(Math.random() * array.length);
+		return array[i];
+	}
+};

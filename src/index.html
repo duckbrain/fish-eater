@@ -1,57 +1,32 @@
-<html manifest="fisheater.appcache">
+<!doctype html>
+<html><!--manifest="manifest.appcache"-->
 <head>
-    <title>FishEater by Jonathan Duck</title>
-    <script type="text/javascript" src="settings.js"></script>
-	<style type="text/css">
-		body
-		{
-			display: -webkit-box;
-			-webkit-box-orient: horizontal;
-			-webkit-box-pack: center;
-			-webkit-box-align: center;
-		}
-		a:visited
-		{
-			color:blue;
-		}
-		#highscore:before
-		{
-			content: "High Score:";
-			margin-right: 4px;
-		}
-
-		.black { background-color: black; color: white; }
-		.black a { color: lightblue; }
-	</style>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="stylesheet" type="text/css" href="style.css" >
+	<link rel="apple-touch-icon" href="img/icon_128.png">
+	<link rel="icon" type="image/png" href="img/icon_16.png">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<title>Fish Eater</title>
 </head>
-<body onkeydown="page_keydown" onkeyup="page_keyup">
-    <center>
-        <script type="text/javascript" src="fisheater.js"></script>
-        <canvas onmousedown="page_mousedown" onmouseup="page_mouseup" id="canvas" width="750" height="566" style="width: 750; height: 566; margin: 0px;
-            padding: 0px; background-color: lightblue; text-align: center;">
-        Your browser does not support the canvas element. To play the game you will need a browser that follows HTML5 web standards. I recommend <a href="http://chrome.google.com">Google Chrome</a>, but <a href="http://www.firefox.com">Mozilla Firefox</a> is another popular browser that supports the canvas element.
-    </canvas>
-		<table style="width: 750px;">
-			<tr>
-				<td style="text-align:left;">
-					<a href="javascript:TogglePause()">Pause</a>
-					<a href="javascript:RestartGame()">Restart</a>
-					&nbsp;
-					<span style="display: none;">
-						<input id="mousebox" type="checkbox">
-						<label for="mousebox">Mouse Control</label>
-					</span>
-				</td>
-				<td style="text-align:center;">
-					<span id="highscore"></span>
-				</td>
-				<td style="text-align:right;">
-					<a href="options.html#instructions">How to Play</a>
-				</td>
-			</tr>
-		</table>
-    </center>
-
-    <script type="text/javascript" src="startgame.js"></script>
+<body>
+	<canvas id="canvas"></canvas>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/knockout.js"></script>
+	<script type="text/javascript" src="js/datamodel.js"></script>
+	<script type="text/javascript" src="js/options_datamodel.js"></script>
+	<script type="text/javascript" src="js/color.js"></script>
+	<script type="text/javascript" src="js/fish.js"></script>
+	<script type="text/javascript" src="js/playerfish.js"></script>
+	<script type="text/javascript" src="js/enemyfish.js"></script>
+	<script type="text/javascript" src="js/powerups.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+	<script type="text/javascript" src="js/keycontroller.js"></script>
+	<script type="text/javascript" src="js/touchcontroller.js"></script>
+	<script type="text/javascript" src="js/padcontroller.js"></script>
+	<script type="text/javascript" src="js/extras.js"></script>
+	<script type="text/javascript" src="js/status.js"></script>
+	<script type="text/javascript" src="js/game.js"></script>
+	<script type="text/javascript" src="js/debug.js"></script>
 </body>
 </html>

@@ -180,7 +180,7 @@ function increment(passed) {
 	for (index = 0; index < fishes.length; index = index + 1) {
 		f = fishes[index];
 		if (you.powerup != powerup.TimeStop) {
-			//TODO:Intelegence
+			//TODO:Intelligence
 			if (f.position.y < waterLevel)
 				f.momentum.y++;
 			else if (f.intelligence == 0) {
@@ -492,7 +492,7 @@ function vector(x, y) {
 function fish(s, c) {
 	this.size = s;
 	this.color = c;
-	this.powerup = Math.floor(Math.random() * 50);
+	dws
 	this.position = new vector(0, 0);
 	this.momentum = new vector(0, 0);
 	this.direction = 'right';
@@ -529,27 +529,16 @@ function fish(s, c) {
 			else ctx.fillStyle = this.color;
 		ctx.beginPath();
 		if (this == you && (this.powerup == powerup.PacMan || this.powerup == powerup.Super))
+		//Omn OMno OMno Pac-Mouth
 			if (this.direction == 'left') {
 				ctx.arc(this.position.x, this.position.y, this.size / 2, Math.PI - Math.abs(Math.sin(((timeprogress + this.timeOffset) / 5)) / 2), -Math.PI + Math.abs(Math.sin((timeprogress + this.timeOffset) / 5) / 2), true);
-				ctx.lineTo(this.position.x, this.position.y)
-				ctx.closePath();
-				ctx.fill();
-				ctx.strokeStyle = 'black';
-				if (showOutline)
-					ctx.stroke();
-				ctx.beginPath();
+				ctx.lineTo(this.position.x, this.position.y);
 				ctx.moveTo(this.position.x + this.size / 2, this.position.y);
 				this.drawTail(ctx);
 			}
 			else {
 				ctx.arc(this.position.x, this.position.y, this.size / 2, Math.abs(Math.sin(((timeprogress + this.timeOffset) / 5)) / 2), Math.PI * 2 - Math.abs(Math.sin((timeprogress + this.timeOffset) / 5) / 2), false);
-				ctx.lineTo(this.position.x, this.position.y)
-				ctx.closePath();
-				ctx.fill();
-				ctx.strokeStyle = 'black';
-				if (showOutline)
-					ctx.stroke();
-				ctx.beginPath();
+				ctx.lineTo(this.position.x, this.position.y);
 				ctx.moveTo(this.position.x - this.size / 2, this.position.y);
 				this.drawTail(ctx);
 			}
@@ -694,7 +683,7 @@ function random_color(format) {
 	var rint = Math.round(0xffffff * Math.random());
 	switch (format) {
 		case 'hex':
-			return ('#0' + rint.toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
+			return ('#0' + Math.round(0xffffff * Math.random()).toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
 			break;
 
 		case 'rgb':
@@ -864,10 +853,7 @@ function Pause() {
 	clearInterval(timer);
 	timer = -1;
 	ctx = drawingCanvas.getContext('2d');
-	ctx.fillStyle = 'black';
-	ctx.font = '50pt Arial';
-	var v = ctx.measureText(PauseReason);
-	ctx.fillText(PauseReason, Width / 2 - v.width / 2, Height / 2);
+	 
 	try { playingMusic.pause(); }
 	catch (ex) { }
 	try { backgroundMusic.pause(); }
@@ -928,7 +914,7 @@ sounds = { "Fast": new Audio("media/fast.mp3"),
 	"PacMan": new Audio("media/pacman.mp3"),
 	"TimeStop": new Audio("media/timestop.mp3"),
 	"Spawn": new Audio("media/spawn.mp3"),
-	"Invincability": new Audio("media/invincable.mp3"),
+	"Invincibility": new Audio("media/invincible.mp3"),
 	"Song": new Audio("media/song.mp3"),
 	"Super": new Audio("media/super.mp3"),
 	"Heal": new Audio("media/heal.mp3"),
@@ -937,133 +923,3 @@ sounds = { "Fast": new Audio("media/fast.mp3"),
 
 document.onkeydown = page_keydown;
 document.onkeyup = page_keyup;
-
-//Mobile Detection
-var deviceIphone = "iphone";
-var deviceIpod = "ipod";
-
-//Initialize our user agent string to lower case.
-var uagent = navigator.userAgent.toLowerCase();
-
-//**************************
-// Detects if the current device is an iPhone.
-function DetectIphone() {
-	if (uagent.search(deviceIphone) > -1)
-		return true;
-	else
-		return false;
-}
-
-//**************************
-// Detects if the current device is an iPod Touch.
-function DetectIpod() {
-	if (uagent.search(deviceIpod) > -1)
-		return true;
-	else
-		return false;
-}
-
-//**************************
-// Detects if the current device is an iPhone or iPod Touch.
-function DetectIphoneOrIpod() {
-	if (DetectIphone())
-		return true;
-	else if (DetectIpod())
-		return true;
-	else
-		return false;
-}
-
-var deviceS60 = "series60";
-var deviceSymbian = "symbian";
-var engineWebKit = "webkit";
-
-//Initialize our user agent string to lower case.
-var uagent = navigator.userAgent.toLowerCase();
-
-//**************************
-// Detects if the current browser is the S60 Open Source Browser.
-// Screen out older devices and the old WML browser.
-function DetectS60OssBrowser() {
-	if (uagent.search(engineWebKit) > -1) {
-		if ((uagent.search(deviceS60) > -1 ||
-uagent.search(deviceSymbian) > -1))
-			return true;
-		else
-			return false;
-	}
-	else
-		return false;
-}
-
-var deviceAndroid = "android";
-
-//**************************
-// Detects if the current device is an Android OS-based device.
-function DetectAndroid() {
-	if (uagent.search(deviceAndroid) > -1)
-		return true;
-	else
-		return false;
-}
-
-
-//**************************
-// Detects if the current device is an Android OS-based device and
-//   the browser is based on WebKit.
-function DetectAndroidWebKit() {
-	if (DetectAndroid()) {
-		if (DetectWebkit())
-			return true;
-		else
-			return false;
-	}
-	else
-		return false;
-}
-
-var deviceWinMob = "windows ce";
-
-//Initialize our user agent string to lower case.
-var uagent = navigator.userAgent.toLowerCase();
-
-//**************************
-// Detects if the current browser is a Windows Mobile device.
-function DetectWindowsMobile() {
-	if (uagent.search(deviceWinMob) > -1)
-		return true;
-	else
-		return false;
-}
-
-var deviceBB = "blackberry";
-
-//Initialize our user agent string to lower case.
-var uagent = navigator.userAgent.toLowerCase();
-
-//**************************
-// Detects if the current browser is a BlackBerry of some sort.
-function DetectBlackBerry() {
-	if (uagent.search(deviceBB) > -1)
-		return true;
-	else
-		return false;
-}
-
-var devicePalm = "palm";
-
-//Initialize our user agent string to lower case.
-var uagent = navigator.userAgent.toLowerCase();
-
-//**************************
-// Detects if the current browser is on a PalmOS device.
-function DetectPalmOS() {
-	if (uagent.search(devicePalm) > -1)
-		return true;
-	else
-		return false;
-}
-
-function DetectMobile() {
-	return DetectAndroid() || DetectBlackBerry() || DetectIphoneOrIpod() || DetectPalmOS() || DetectS60OssBrowser() || DetectWindowsMobile();
-}
