@@ -1,15 +1,18 @@
 // Basic fish class
 
 Fish = function() {
-	// TODO: Initialize randomly if passed game info
 	this.x = 0;
 	this.y = 0;
 	this.velX = 0;
 	this.velY = 0;
 	this.size = 1;
+	this.color = new Color(255, 255, 0);
 	this.lineColor = "black";
 	this.eyeBack = "white";
 	this.eyePupil = "black";
+	this.tailDivideFactor = .5;
+	this.tailLengthenFactor = 1;
+	this.tailSpinFactor = 0;
 	this.speed = 2;
 	this._controller = null;	
 	this.facingRight = true;
@@ -31,7 +34,7 @@ Fish.prototype = {
 	isInWater: function() {
 		return this.y >= game.waterLevel;
 	},
-	getColor: function() { return "black"; },
+	getColor: function() { return this.color.toString(); },
 	getEyeDirection: function() { return this.facingRight ? Math.PI : 0; },
 	
 	distanceTo: function(f) { 
@@ -59,8 +62,8 @@ Fish.prototype = {
 		yMod = yMod || 1;
 		var a, b;
 		var x, c1, c2;
-		c1 = this.y - yMod * this.size / 2;
-		c2 = this.y + yMod * this.size / 2;
+		c1 = this.y - yMod * this.size;
+		c2 = this.y + yMod * this.size;
 		if (this.facingRight)
 			x = this.x - xMod * this.size;
 		else
@@ -100,7 +103,7 @@ Fish.prototype = {
 		if (typeof(this.drawBody) == "function")
 			this.drawBody(ctx);
 		if (typeof(this.drawTail) == "function")
-			this.drawTail(ctx);
+			this.drawTail(ctx, this.tailLengthenFactor, this.tailDivideFactor);
 		ctx.closePath();
 		ctx.fill();
 		ctx.strokeStyle = this.lineColor;

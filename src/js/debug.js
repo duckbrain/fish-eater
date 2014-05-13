@@ -26,5 +26,5 @@ Debug.prototype.increment = function() {
     ]
 }
     
-debug = new Debug();
-game.drawablesTop.push(debug);
+//debug = new Debug();
+//game.drawablesTop.push(debug);

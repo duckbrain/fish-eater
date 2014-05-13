@@ -20,7 +20,9 @@ PlayerFish.prototype.setPowerup = function(p) {
 		p.init(this);
 		this.powerupRemaining = p.timeLimit;
 		game.setMusic(p.mp3);
-		game._mp3s[p.mp3].currentTime = 0;
+		var mp3Player = game._mp3s[p.mp3];
+		if (mp3Player.readyState == 4)
+			mp3Player.currentTime = 0;
 		++this.powerupCount;
 	} else {
 		game.setMusic(game.backgroundMusic);
@@ -38,10 +40,6 @@ PlayerFish.prototype.getScore = function() {
 	};
 	score.total = score.eating + score.eatingSize + score.powerups + score.health + score.size;
 	return score;
-}
-
-PlayerFish.prototype.getColor = function() {
-	return "yellow";
 }
 
 PlayerFish.prototype.getEyeDirection = function() {

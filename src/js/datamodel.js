@@ -1,7 +1,6 @@
-if (typeof(window.lds) != 'object') window.lds = {};
 // This class will take a JSON object and create a data model for Knockout JS.
 // Each page should load the JSON object and create an instance of this class.
-window.lds.DataModel = function(model) {
+window.DataModel = function(model) {
 	var self = this;
 	
 	self.model = model;

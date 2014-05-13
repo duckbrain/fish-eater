@@ -2,7 +2,6 @@
 
 /*
 	"PacMan": 2,
-	"TimeStop": 3,
 	"Spawn": 4,
 */
 
@@ -21,35 +20,22 @@ function PowerUp(displayText, mp3, timeLimit, functionName, newFunction, increme
 	else 
 		this.functionName = functionName;
 		
-	this.init = function(fish) {
-		if (this.functionName.length) {
-			for (var i in this.functionName) {
-				fish['__old_' + this.functionName[i]] = fish[this.functionName[i]];
-				fish[this.functionName[i]] = this[this.functionName[i]];
-			}
-		}
-	};
-	this.deinit = function(fish) {
-		if (this.functionName.length) {
-			for (var i in this.functionName) {
-				fish[this.functionName[i]] = fish['__old_' + this.functionName[i]];
-				delete fish['__old_' + this.functionName[i]];
-			}
-		}
-	};
+	//this.init = PowerUp.prototype.init;
+	//this.deinit = PowerUp.prototype.deinit;
 	this.increment = increment || function() { };
 }
 PowerUp.prototype = {
 	init: function(fish) {
 		if (this.functionName.length) {
-			for (var i in this.functionName)
+			for (var i = 0; i < this.functionName.length; ++i) {
 				fish['__old_' + this.functionName[i]] = fish[this.functionName[i]];
 				fish[this.functionName[i]] = this[this.functionName[i]];
+			}
 		}
 	},
 	deinit: function(fish) {
 		if (this.functionName.length) {
-			for (var i in this.functionName) {
+			for (var i = 0; i < this.functionName.length; ++i) {
 				fish[this.functionName[i]] = fish['__old_' + this.functionName[i]];
 				delete fish['__old_' + this.functionName[i]];
 			}
@@ -64,6 +50,7 @@ PowerUp.prototype = {
 function FlyPowerUp() {
 	this.tick = 0;
 	this.tickSpeed = 0.7;
+	this.isInWater = function() { return true; };
 }
 FlyPowerUp.prototype = new PowerUp("Fly", "fly.mp3", 600, ["isInWater", "drawTail"]);
 FlyPowerUp.prototype.isInWater = function() { return true; };
@@ -92,17 +79,16 @@ FlyPowerUp.prototype.increment = function(fish) {
 function HealPowerUp() {
 	this.tick = 0;
 	this.tickSpeed = .3;
-	this.color = new Color(255, 255, 0);
 	this.hsv = {};
+	this.color = new Color()
 }
 HealPowerUp.prototype = new PowerUp("Heal", "heal.mp3", 50, 'getColor');
 HealPowerUp.prototype.init = function(fish) {
 	PowerUp.prototype.init.call(this, fish);
-	// TODO Get Fish color and set it
-	this.hsv = this.color.getHSV();
+	
 };
 HealPowerUp.prototype.getColor = function() {
-	var hsv = this.powerup.hsv;
+	var hsv = this.color.getHSV();
 	hsv.s = Math.abs(Math.cos(this.powerup.tick));
 	this.powerup.color.setHSV(hsv.h, hsv.s, hsv.v);
 	return this.powerup.color.toString();
@@ -117,21 +103,13 @@ HealPowerUp.prototype.increment = function(fish) {
 // Fast Powerup
 //
 function FastPowerUp() {
+	//TODO: Use Fish.tailDivideFactor to change tail size
 	this.ratio = 1.5
 }
-FastPowerUp.prototype = new PowerUp("Fast", "fast.mp3", 600, ['speed', 'drawTail']);
-FastPowerUp.prototype.drawTail = function(ctx) {
-	var a, b;
-	if (this.facingRight) {
-		a = game.transform(this.x - this.size * 1.2, this.y - this.size / 3);
-		b = game.transform(this.x - this.size * 1.2, this.y + this.size / 3);
-	} else {
-		a = game.transform(this.x + this.size * 1.2, this.y - this.size / 3);
-		b = game.transform(this.x + this.size * 1.2, this.y + this.size / 3);
-	}
-	ctx.lineTo(a.x, a.y);
-	ctx.lineTo(b.x, b.y);
-};
+FastPowerUp.prototype = new PowerUp("Fast", "fast.mp3", 600, 
+	['speed','tailDivideFactor', 'tailLengthenFactor']);
+FastPowerUp.prototype.tailDivideFactor = .3;
+FastPowerUp.prototype.tailLengthenFactor = 1.4;
 FastPowerUp.prototype.init = function(fish) {
 	PowerUp.prototype.init.call(this, fish);
 	fish.speed = fish.__old_speed * this.ratio;
@@ -142,7 +120,8 @@ FastPowerUp.prototype.init = function(fish) {
 //
 function InvinciblePowerUp() {
 	this.getColor = function() {
-		return ('#0' + Math.round(0xffffff * Math.random()).toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
+		return ('#0' + Math.round(0xffffff * Math.random())
+			.toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
 	};
 	this.distanceTo = function(f) {
 		if (this.edible(f))
@@ -252,23 +231,26 @@ TimeStopPowerUp.prototype.enemyIncrement = function() {
 // Super Powerup
 //
 function SuperPowerUp() {
+	this.tick = 0;
 }
-SuperPowerUp.prototype = new PowerUp("Super", "super.mp3", 100, ["drawBody", "drawTail", "isInWater", "getColor"]);
-
-SuperPowerUp.prototype.drawTail = FlyPowerUp.prototype.drawTail;
+SuperPowerUp.prototype = new PowerUp("Super", "super.mp3", 100, 
+	["tailDivideFactor", "tailLengthenFactor", "drawBody", "isInWater", "getColor"]);
+SuperPowerUp.prototype.tailDivideFactor = FastPowerUp.prototype.tailDivideFactor;
+SuperPowerUp.prototype.tailLengthenFactor = FastPowerUp.prototype.tailLengthenFactor;
 SuperPowerUp.prototype.isInWater = FlyPowerUp.prototype.isInWater;
 SuperPowerUp.prototype.drawBody = PacManPowerUp.prototype.drawBody;
 SuperPowerUp.prototype.getColor = InvinciblePowerUp.prototype.getColor;
-SuperPowerUp.prototype.drawBody = SuperPowerUp.prototype.drawBody;
 
 SuperPowerUp.prototype.init = function(fish) {
 	PowerUp.prototype.init.call(this, fish);
+	
 };
 SuperPowerUp.prototype.deinit = function(fish) {
 	PowerUp.prototype.deinit.call(this, fish);
 };
 SuperPowerUp.prototype.increment = function(fish) {
 	var p = powerups.asArray();
+	++this.tick;
 	for (var i = 0; i < p.length; ++i) {
 		if (p[i] != this)
 			p[i].increment(fish);
