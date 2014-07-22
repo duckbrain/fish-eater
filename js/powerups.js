@@ -240,13 +240,15 @@ SuperPowerUp.prototype.tailLengthenFactor = FastPowerUp.prototype.tailLengthenFa
 SuperPowerUp.prototype.isInWater = FlyPowerUp.prototype.isInWater;
 SuperPowerUp.prototype.drawBody = PacManPowerUp.prototype.drawBody;
 SuperPowerUp.prototype.getColor = InvinciblePowerUp.prototype.getColor;
+SuperPowerUp.prototype.applyController = SongPowerUp.prototype.applyController;
 
 SuperPowerUp.prototype.init = function(fish) {
 	PowerUp.prototype.init.call(this, fish);
-	
+	SongPowerUp.prototype.init.call(this, fish);
 };
 SuperPowerUp.prototype.deinit = function(fish) {
 	PowerUp.prototype.deinit.call(this, fish);
+	SongPowerUp.prototype.deinit.call(this, fish);
 };
 SuperPowerUp.prototype.increment = function(fish) {
 	var p = powerups.asArray();
