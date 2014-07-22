@@ -260,7 +260,7 @@ SuperPowerUp.prototype.increment = function(fish) {
 powerups = {
 	fly: new FlyPowerUp(),
 	heal: new HealPowerUp(),
-	super: new SuperPowerUp(),
+	"super": new SuperPowerUp(),
 	fast: new FastPowerUp(),
 	invincible: new InvinciblePowerUp(),
 	song: new SongPowerUp(),
