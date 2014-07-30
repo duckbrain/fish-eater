@@ -234,7 +234,7 @@ function SuperPowerUp() {
 	this.tick = 0;
 }
 SuperPowerUp.prototype = new PowerUp("Super", "super.mp3", 100, 
-	["tailDivideFactor", "tailLengthenFactor", "drawBody", "isInWater", "getColor", "pacman"]);
+	["tailDivideFactor", "tailLengthenFactor", "drawBody", "isInWater", "getColor", "edible", "onCollision", "setPowerup"]);
 SuperPowerUp.prototype.tailDivideFactor = FastPowerUp.prototype.tailDivideFactor;
 SuperPowerUp.prototype.tailLengthenFactor = FastPowerUp.prototype.tailLengthenFactor;
 SuperPowerUp.prototype.isInWater = FlyPowerUp.prototype.isInWater;
@@ -242,6 +242,21 @@ SuperPowerUp.prototype.drawBody = PacManPowerUp.prototype.drawBody;
 SuperPowerUp.prototype.getColor = InvinciblePowerUp.prototype.getColor;
 SuperPowerUp.prototype.applyController = SongPowerUp.prototype.applyController;
 SuperPowerUp.prototype.edible = PacManPowerUp.prototype.edible;
+SuperPowerUp.prototype.onCollision = function(otherFish) {
+	if (otherFish.powerup == powerups["super"]) {
+		this.powerupRemaining = Math.min(this.powerup.timeLimit, this.powerupRemaining + 3);
+	} else if (otherFish.powerup == null) {
+		this.powerupRemaining = Math.min(this.powerup.timeLimit, this.powerupRemaining + 3);
+	} else {
+		this.powerupRemaining = Math.min(this.powerup.timeLimit, this.powerupRemaining + 10);
+	}
+	this.__old_onCollision.call(this, otherFish);
+};
+SuperPowerUp.prototype.setPowerup = function(powerup) {
+	if (powerup == null) {
+		this.__old_setPowerup(powerup);
+	}
+};
 SuperPowerUp.prototype.init = function(fish) {
 	PowerUp.prototype.init.call(this, fish);
 	SongPowerUp.prototype.init.call(this, fish);
