@@ -119,10 +119,6 @@ FastPowerUp.prototype.init = function(fish) {
 // Invincible Powerup
 //
 function InvinciblePowerUp() {
-	this.getColor = function() {
-		return ('#0' + Math.round(0xffffff * Math.random())
-			.toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
-	};
 	this.distanceTo = function(f) {
 		if (this.edible(f))
 			return Fish.prototype.distanceTo.call(this, f);
@@ -131,6 +127,10 @@ function InvinciblePowerUp() {
 	this.onCollision = function() { }
 }
 InvinciblePowerUp.prototype = new PowerUp("Invincible", "invincable.mp3", 500, ['getColor', 'distanceTo']);
+InvinciblePowerUp.prototype.getColor = function() {
+	return ('#0' + Math.round(0xffffff * Math.random())
+		.toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
+};
 
 //
 // Song Powerup
@@ -234,14 +234,14 @@ function SuperPowerUp() {
 	this.tick = 0;
 }
 SuperPowerUp.prototype = new PowerUp("Super", "super.mp3", 100, 
-	["tailDivideFactor", "tailLengthenFactor", "drawBody", "isInWater", "getColor"]);
+	["tailDivideFactor", "tailLengthenFactor", "drawBody", "isInWater", "getColor", "pacman"]);
 SuperPowerUp.prototype.tailDivideFactor = FastPowerUp.prototype.tailDivideFactor;
 SuperPowerUp.prototype.tailLengthenFactor = FastPowerUp.prototype.tailLengthenFactor;
 SuperPowerUp.prototype.isInWater = FlyPowerUp.prototype.isInWater;
 SuperPowerUp.prototype.drawBody = PacManPowerUp.prototype.drawBody;
 SuperPowerUp.prototype.getColor = InvinciblePowerUp.prototype.getColor;
 SuperPowerUp.prototype.applyController = SongPowerUp.prototype.applyController;
-
+SuperPowerUp.prototype.edible = PacManPowerUp.prototype.edible;
 SuperPowerUp.prototype.init = function(fish) {
 	PowerUp.prototype.init.call(this, fish);
 	SongPowerUp.prototype.init.call(this, fish);
