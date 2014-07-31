@@ -50,3 +50,15 @@ canvas#background {
 #content {
     overflow: hidden;
 }
+
+.play {
+    margin-top: 3em;
+}
+
+.play>a {
+    padding: 1em 3em;
+    background-color:gray;
+    border-radius:1em;
+    color: black;
+    text-decoration: none;
+}
