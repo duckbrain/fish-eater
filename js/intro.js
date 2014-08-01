@@ -19,22 +19,34 @@ game = {
 }
 
 window.onload = function() {
-    game.canvas = document.getElementById('background');
+	var mute = document.getElementById('mute-button');
+    var canvas = document.getElementById('background');
 
     window.onresize = function() {
-        game.width = (game.canvas.width = window.innerWidth) / game.scale;
-		game.height = (game.canvas.height = window.innerHeight) / game.scale;
+        game.width = (canvas.width = window.innerWidth) / game.scale;
+		game.height = (canvas.height = window.innerHeight) / game.scale;
     };
 	window.onresize();
+	
+	mute.onclick = function(e) {
+		var classes = mute.children[0].classList;
+		//TODO: Update Volume Setting when implemented
+		if (classes.contains("fa-volume-up")) {
+			classes.remove("fa-volume-up");
+			classes.add("fa-volume-off");
+		} else {
+			classes.remove("fa-volume-off");
+			classes.add("fa-volume-up");
+		}
+		e.preventDefault();
+	}
 }
 
 
-
-
 setInterval(function() {
-    game.canvas = document.getElementById('background');
-    var ctx = game.canvas.getContext('2d');
-    ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
+    var canvas = document.getElementById('background');
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     function inc(e) {
         e.increment();

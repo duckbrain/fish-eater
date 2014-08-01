@@ -47,8 +47,8 @@ canvas#background {
     white-space: normal;
 }
 
-#content {
-    overflow: hidden;
+#master>#content {
+    overflow-x: hidden;
 }
 
 .play {
@@ -56,9 +56,71 @@ canvas#background {
 }
 
 .play>a {
-    padding: 1em 3em;
-    background-color:gray;
+    padding: 1em 2em;
+    background-color: #aaa;
     border-radius:1em;
     color: black;
     text-decoration: none;
+    font-size: larger;
+}
+
+#tabs .tab-content {
+    display: none;
+}
+#tabs>div:target .tab-content {
+    display:block;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: .5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.3);
+  border-radius: 1em;
+  width: .4em;
+}
+
+.tabs {
+  position: relative;   
+  min-height: 700px; /* This part sucks */
+  clear: both;
+  margin: 25px 0;
+}
+.tab {
+  float: left;
+  min-width: 33.333333%;
+}
+.tab label {
+  padding: 10px; 
+  border: 1px solid #ccc;
+  border-radius: 1em;
+  margin: 0 1em;
+  margin-left: -1px; 
+  position: relative;
+  text-align: center;
+  left: 1px;
+  display: block;
+  cursor: pointer;
+}
+.tab [type=radio] {
+  display: none;   
+}
+.content {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  display: none;
+  margin-bottom: 1em;
+}
+[type=radio]:checked ~ label {
+  background: rgba(255,255,0,.3);
+  z-index: 2;
+}
+[type=radio]:checked ~ label ~ .content {
+  display: block;
 }

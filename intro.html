@@ -6,6 +6,7 @@
 	<link rel="apple-touch-icon" href="img/icon_128.png">
 	<link rel="icon" type="image/png" href="img/icon_16.png">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="font-awesome.css">
     <link rel="stylesheet" href="intro.css">
     <script src="js/color.js"></script>
     <script src="js/extras.js"></script>
@@ -19,10 +20,85 @@
                 <img src="img/icon_128.png"> Fish Eater
             </h1>
             <h2>Developed by Jonathan Duck</h2>
-            <p class="play"><a href="index.html">Play Now</a></p>
+            <p class="play">
+                <a href="index.html">Play Now</a>
+                <a href="index.html" id="mute-button"><i class="fa fa-volume-off"></i></a>
+            </p>
         </div>
         <div id="content">
-            Test
+            <div class="tabs">
+    
+               <div class="tab">
+                   <input type="radio" id="Instructions" name="tab-group" checked>
+                   <label for="Instructions">Instructions</label>
+                   <div class="content">
+                        <h3>How to play Fish Eater:</h3>
+                        <p>
+                            In Fish Eater you play as a little fish in a big pond. You must become the best by becoming the biggest.
+                            Fish Eater is mainly played by using either the arrow keys or the W, A, S, and D keys.
+                            You may use the keys to move in any direction in the water. Your goal is simple: eat
+                            smaller fish to become bigger. Fish are colored according to if you may eat them or not.
+                        </p>
+                        <p>The colorings are as follows.</p>
+                        <ul>
+                            <li><span style="color: green;">Green</span>: These fish can be eaten to make you bigger and give you health.</li>
+                            <li><span style="color: purple;">Purple</span>: These fish can be eaten to make you bigger, give you health, and give you a temporary power-up. More on power-ups later</li>
+                            <li><span style="color: red;">Red</span>: These fish can <strong>not</strong> be eaten to make you bigger and will take away health if you touch them.</li>
+                        </ul>
+                        <p>
+                          To eat a fish, you simply run into it's body with your body. Tails have no effect when touched.
+                        </p>
+                        <p>The power-ups are as follows.</p>
+                        <ul>
+                            <li><i class="fa fa-plane"></i> Fly: This will let you soar through the air as if it was water.</li>
+                            <li><i class="fa fa-fast-forward"></i> Fast: They can't eat you if you can accelerate away from them twice as fast and effortlessly jump of the screen.</li>
+                            <li><i class="fa fa-plus-square"></i> Heal: You magically start healing very quickly.</li>
+                            <li><i class="fa fa-music"></i> Control Song: This eiree song will let the smart ones still stare you down, but their bodies are not under their control.</li>
+                            <li><i class="fa fa-star"></i> Invincibility: This power-up will let you swim right by the big red fish.</li>
+                            <li><i class="fa fa-clock-o"></i> Time Stop: Time stop is most convinient when you are excluded.</li>
+                            <li><i class="fa fa-volume-off"></i> Spawn: Nothing like a small snack to prepare you for the big meal.</li>
+                            <li><i class="fa fa-volume-off"></i> Pac-man: No fish is safe from your hunger.</li>
+                            <li><i class="fa fa-volume-off"></i> Super: This is the ultimate power-up, but can you make it last long enough?</li>
+                        </ul>
+                   </div> 
+               </div>
+
+               <div class="tab">
+                   <input type="radio" id="Options" name="tab-group">
+                   <label for="Options">Options</label>
+                   <div class="content">
+                       
+                   </div> 
+               </div>
+
+                <div class="tab">
+                   <input type="radio" id="About" name="tab-group">
+                   <label for="About">About</label>
+                   <div class="content">
+                       
+                   </div> 
+               </div>
+
+            </div>
+            
+            <!--div id="tabs">
+                <div id="instructions">
+                    <div class="tab-head"><a href="#instructions">Instructions</a></div>
+                    <div class="tab-content">
+                        
+                    </div>
+                </div>
+                <div id="options">
+                    <div class="tab-head"><a href="#options">Options</a></div>
+                    <div class="tab-content">
+                    </div>
+                </div>
+                <div id="about">
+                    <div class="tab-head"><a href="#about">About</a></div>
+                    <div class="tab-content">
+                    </div>
+                </div>
+            </div-->
         </div>
     </div>
 </body>
