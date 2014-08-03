@@ -11,6 +11,5 @@
     "16": "img/icon_16.png",
     "128": "img/icon_128.png"
   },
-  "options_page": "options.html",
   "manifest_version": 2
 }
