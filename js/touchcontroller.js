@@ -51,13 +51,21 @@ TouchController = function(bound) {
 		
 		function handle() {
 			if (!self.leftCircle && new Date() - self.timeDown <= self.pauseTime) {
-				if (self.lastTap) {
+				if (game.getPaused()) {
 					game.togglePaused();
-					self.lastTap = false;
 				} else {
-					self.depower = true;
-					self.lastTap = true
-				}	
+					if (self.lastTap) {
+						if (f.powerup != null) {
+							self.depower = true;
+						} else {
+							game.togglePaused();
+						}
+						self.lastTap = false;
+					} else {
+						self.lastTap = true
+					}	
+				}
+				
 			} else {
 				self.lastTap = false;
 			}
