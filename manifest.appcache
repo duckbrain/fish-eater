@@ -15,11 +15,11 @@ audio/win.mp3
 css/font-awesome.css
 css/intro.css
 css/style.css
-fonts/FontAwesome.otf
-fonts/fontawesome-webfont.eot
-fonts/fontawesome-webfont.svg
-fonts/fontawesome-webfont.ttf
-fonts/fontawesome-webfont.woff
+fonts/FontAwesome.otf?v=4.1.0
+fonts/fontawesome-webfont.eot?v=4.1.0
+fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular
+fonts/fontawesome-webfont.ttf?v=4.1.0
+fonts/fontawesome-webfont.woff?v=4.1.0
 game.html
 img/greenfish.svg
 img/icon_128.png
