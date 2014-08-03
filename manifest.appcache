@@ -41,6 +41,5 @@ js/padcontroller.js
 js/playerfish.js
 js/powerups.js
 js/settings.js
-js/startgame.js
 js/status.js
 js/touchcontroller.js
