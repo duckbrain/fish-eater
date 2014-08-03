@@ -28,7 +28,7 @@ window.onload = function() {
     };
 	window.onresize();
 	
-	mute.onclick = function(e) {
+	/*mute.onclick = function(e) {
 		var classes = mute.children[0].classList;
 		//TODO: Update Volume Setting when implemented
 		if (classes.contains("fa-volume-up")) {
@@ -39,7 +39,7 @@ window.onload = function() {
 			classes.add("fa-volume-up");
 		}
 		e.preventDefault();
-	}
+	}*/
 	
 	document.getElementById('water').style.background = game.water.color;
 }

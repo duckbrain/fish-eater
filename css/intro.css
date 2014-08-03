@@ -5,6 +5,26 @@ body {
     font-size:120%;
 }
 
+a, a:hover, a:focus, a:visited, a:active {
+  color:lightblue;
+}
+
+strong {
+  color:red;
+}
+
+.fish {
+  height: .9em;
+}
+
+.fish-small {
+  height: .6em;
+}
+
+.fish-big {
+  height: 1.2em;
+}
+
 canvas#background {
     position: fixed;
     width: 100%;
