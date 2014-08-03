@@ -151,5 +151,4 @@ var keys = {
     'coma': 188,
     'slash': 191,
     'backslash': 220
-	
 }

@@ -40,6 +40,8 @@ window.onload = function() {
 		}
 		e.preventDefault();
 	}
+	
+	document.getElementById('water').style.background = game.water.color;
 }
 
 
@@ -54,5 +56,6 @@ setInterval(function() {
     }
     
     inc(game.sun);
-    inc(game.water);
+    game.water.increment();
+	document.getElementById('water').style.top = (game.waterLevel * game.scale) + 'px';
 }, 33);

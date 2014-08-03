@@ -52,7 +52,7 @@ function FlyPowerUp() {
 	this.tickSpeed = 0.7;
 	this.isInWater = function() { return true; };
 }
-FlyPowerUp.prototype = new PowerUp("Fly", "fly.mp3", 600, ["isInWater", "drawTail"]);
+FlyPowerUp.prototype = new PowerUp("\uf072 Fly", "fly.mp3", 600, ["isInWater", "drawTail"]);
 FlyPowerUp.prototype.isInWater = function() { return true; };
 FlyPowerUp.prototype.drawTail = function(ctx) {
 	var a, b;
@@ -82,7 +82,7 @@ function HealPowerUp() {
 	this.hsv = {};
 	this.color = new Color()
 }
-HealPowerUp.prototype = new PowerUp("Heal", "heal.mp3", 50, 'getColor');
+HealPowerUp.prototype = new PowerUp("\uf0fe Heal", "heal.mp3", 50, 'getColor');
 HealPowerUp.prototype.init = function(fish) {
 	PowerUp.prototype.init.call(this, fish);
 	
@@ -106,7 +106,7 @@ function FastPowerUp() {
 	//TODO: Use Fish.tailDivideFactor to change tail size
 	this.ratio = 1.5
 }
-FastPowerUp.prototype = new PowerUp("Fast", "fast.mp3", 600, 
+FastPowerUp.prototype = new PowerUp("\uf050 Fast", "fast.mp3", 300, 
 	['speed','tailDivideFactor', 'tailLengthenFactor']);
 FastPowerUp.prototype.tailDivideFactor = .3;
 FastPowerUp.prototype.tailLengthenFactor = 1.4;
@@ -126,7 +126,7 @@ function InvinciblePowerUp() {
 	}
 	this.onCollision = function() { }
 }
-InvinciblePowerUp.prototype = new PowerUp("Invincible", "invincable.mp3", 500, ['getColor', 'distanceTo']);
+InvinciblePowerUp.prototype = new PowerUp("\uf005 Invincible", "invincable.mp3", 500, ['getColor', 'distanceTo']);
 InvinciblePowerUp.prototype.getColor = function() {
 	return ('#0' + Math.round(0xffffff * Math.random())
 		.toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');
@@ -147,7 +147,7 @@ function SongPowerUp() {
 		deinit: function() {}
 	};
 }
-SongPowerUp.prototype = new PowerUp("Control Song", "song.mp3", 300);
+SongPowerUp.prototype = new PowerUp("\uf001 Control Song", "song.mp3", 300);
 SongPowerUp.prototype.init = function() {
 	var self = this;
 	//TODO: Update to new controller
@@ -170,7 +170,7 @@ SongPowerUp.prototype.applyController = function(fish) {
 function PacManPowerUp() {
 	this.tick = 0;
 }
-PacManPowerUp.prototype = new PowerUp("PacMan", "pacman.mp3", 100, ["drawBody", "edible"]);
+PacManPowerUp.prototype = new PowerUp("\uf118 PacMan", "pacman.mp3", 100, ["drawBody", "edible"]);
 PacManPowerUp.prototype.increment = function() {
 	++this.tick;
 };
@@ -207,7 +207,7 @@ PacManPowerUp.prototype.drawBody = function(ctx) {
 }
 
 TimeStopPowerUp = function() {}
-TimeStopPowerUp.prototype = new PowerUp("Time Stop", "timestop.mp3", 300);
+TimeStopPowerUp.prototype = new PowerUp("\uf017 Time Stop", "timestop.mp3", 300);
 TimeStopPowerUp.prototype.init = function(fish) {
 	EnemyFish.prototype.__old_increment = EnemyFish.prototype.increment;
 	EnemyFish.prototype.increment = this.enemyIncrement;
@@ -233,7 +233,7 @@ TimeStopPowerUp.prototype.enemyIncrement = function() {
 function SuperPowerUp() {
 	this.tick = 0;
 }
-SuperPowerUp.prototype = new PowerUp("Super", "super.mp3", 100, 
+SuperPowerUp.prototype = new PowerUp("\uf0e7 Super", "super.mp3", 100, 
 	["tailDivideFactor", "tailLengthenFactor", "drawBody", "isInWater", "getColor", "edible", "onCollision", "setPowerup"]);
 SuperPowerUp.prototype.tailDivideFactor = FastPowerUp.prototype.tailDivideFactor;
 SuperPowerUp.prototype.tailLengthenFactor = FastPowerUp.prototype.tailLengthenFactor;
@@ -243,13 +243,16 @@ SuperPowerUp.prototype.getColor = InvinciblePowerUp.prototype.getColor;
 SuperPowerUp.prototype.applyController = SongPowerUp.prototype.applyController;
 SuperPowerUp.prototype.edible = PacManPowerUp.prototype.edible;
 SuperPowerUp.prototype.onCollision = function(otherFish) {
+	var increase;
 	if (otherFish.powerup == powerups["super"]) {
-		this.powerupRemaining = Math.min(this.powerup.timeLimit, this.powerupRemaining + 3);
+		increase = 100;
 	} else if (otherFish.powerup == null) {
-		this.powerupRemaining = Math.min(this.powerup.timeLimit, this.powerupRemaining + 3);
+		increase = 5;
 	} else {
-		this.powerupRemaining = Math.min(this.powerup.timeLimit, this.powerupRemaining + 10);
+		increase = 10;
 	}
+	increase *= otherFish.size / game.maxSize;
+	this.powerupRemaining = Math.min(this.powerup.timeLimit, this.powerupRemaining + increase);
 	this.__old_onCollision.call(this, otherFish);
 };
 SuperPowerUp.prototype.setPowerup = function(powerup) {

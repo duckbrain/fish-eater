@@ -7,16 +7,18 @@ EnemyFishController.prototype = {
 		if (this.iq > 1) {
 			var closest = game.players[0];
 			var closestDist = closest.distanceTo(fish);
-			game.players.forEach(function(p){
+			for (var i = 0; i < game.players.length; ++i) {
+				var p = game.players[i];
 				var dist = p.distanceTo(fish);
 				if (dist < closestDist) {
 					closest = p;
 					closestDist = dist;
 				}
-			});
+			}
 			fish.closestPlayer = closest;
-			this.up = closest.y < fish.y;
-			this.down = closest.y > fish.y;
+			var run = closest.edible(fish);
+			this.up = run ^ closest.y < fish.y;
+			this.down = run ^ closest.y > fish.y;
 		}
 		if (this.iq == 3) {
 			if (this.up) fish.velY -= this.speedVert / closestDist;
@@ -32,8 +34,9 @@ EnemyFishController.prototype = {
 }
 
 function EnemyFish() {
-	if (Math.floor(Math.random() * 5))
+	if (Math.floor(Math.random() * 5) == 0) {
 		this.powerup = powerups.getRandomPowerup();
+	}
 	this.setController(game.enemyFishController);
 }
 EnemyFish.prototype = new Fish();

@@ -4,10 +4,18 @@ function PlayerController() {
 	this.down = false;
 	this.left = false;
 	this.right = false;
+	this.depower = false;
 	this.speed = 2;
 }
 PlayerController.prototype = {
 	apply: function(fish) {
+		
+		function applyValue() {
+			
+		}
+		
+		//if (typeof())
+		
 		if (this.up) fish.velY -= fish.speed;
 		if (this.down) fish.velY += fish.speed;
 		if (this.left) fish.velX -= fish.speed;
@@ -36,6 +44,8 @@ function GroupController() {
 			if (c.down) self.down = true;
 			if (c.left) self.left = true;
 			if (c.right) self.right = true;
+			if (c.depower)
+				fish.setPowerup(null);
 		});
 		this._.apply(fish);
 	};

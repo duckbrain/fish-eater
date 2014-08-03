@@ -11,3 +11,14 @@ canvas {
 	height: 100%;
 	-ms-touch-action: none; /* Disables all pan/zoom behaviors and fire pointer events in JavaScript instead. */
 }
+
+#back {
+	position:fixed;
+	bottom: .2em;
+	left: .2em;
+}
+
+#back>a, #back>a:active, #back>a:visited {
+	color:black;
+	text-decoration: none;
+}

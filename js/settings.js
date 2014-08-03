@@ -1,3 +1,7 @@
+var settings = {
+	
+}
+
 function GetVersion()
 {
 	var v = localStorage.getItem('version');
@@ -20,52 +24,52 @@ function GetColor(cname)
 	if (c == undefined || c == null)
 		switch (cname) {
 			case 'yourcolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'ediblecolor':
-				c = '00DD00';
+				c = 0x00DD00;
 				break;
 			case 'powerupcolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'enemycolor':
-				c = 'red';
+				c = 0xFF0000;
 				break;
 			case 'watercolorn':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'watercolorh':
-				c = 'FF0000';
+				c = 0xFF0000;
 				break;
 			case 'backcolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'suncolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'pagecolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'panelcolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'paneltcolor':
-				c = '000000';
+				c = 0x000000;
 				break;
 			case 'healthbarcolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'powerupbarcolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			case 'messagecolor':
-				c = 'FFFF00';
+				c = 0xFFFF00;
 				break;
 			default:
-				c = '000000';
+				c = 0x000000;
 				break;
 		}
-	return c;
+	return "0x" + c.toString(16);
 }
 
 function SetColor(cname, color)

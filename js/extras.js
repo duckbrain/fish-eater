@@ -36,6 +36,7 @@ WaterLevel = function() {
 	this.framesToNextChange = 0;
 	this.interval = 1;
 	this.color = new Color(0,0,255,.5);
+	this.hurtColor = new Color(255,0,0,.5);
 }
 WaterLevel.prototype = {
 	increment: function() {
@@ -49,7 +50,11 @@ WaterLevel.prototype = {
 			this.framesToNextChange = Math.random() * 300 + 30
 	},
 	draw: function(ctx) {
-		ctx.fillStyle = this.color.toString();
+		if (game.players.length == 1) {
+			ctx.fillStyle = (game.players[0].hurt ? this.hurtColor : this.color).toString();
+		} else {
+			ctx.fillStyle = this.color.toString();
+		}
 		ctx.fillRect(game.xPan, game.yPan + game.waterLevel * game.scale, game.width * game.scale, game.height * game.scale - (game.yPan + game.waterLevel * game.scale));
 	}
 }

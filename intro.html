@@ -14,11 +14,11 @@
 </head>
 <body>
     <canvas id="background"></canvas>
+	<div id="water"></div>
     <div id="master">
         <div id="header">
-            <h1>
-                <img src="img/icon_128.png"> Fish Eater
-            </h1>
+			<img src="img/icon_128.png">
+            <h1>Fish Eater</h1>
             <h2>Developed by Jonathan Duck</h2>
             <p class="play">
                 <a href="index.html">Play Now</a>
@@ -40,25 +40,38 @@
                             smaller fish to become bigger. Fish are colored according to if you may eat them or not.
                         </p>
                         <p>The colorings are as follows.</p>
-                        <ul>
-                            <li><span style="color: green;">Green</span>: These fish can be eaten to make you bigger and give you health.</li>
-                            <li><span style="color: purple;">Purple</span>: These fish can be eaten to make you bigger, give you health, and give you a temporary power-up. More on power-ups later</li>
-                            <li><span style="color: red;">Red</span>: These fish can <strong>not</strong> be eaten to make you bigger and will take away health if you touch them.</li>
+                        <ul class="fa-ul">
+							<li>
+								<img class="fa-li" src="img/yellowfish.svg" />
+								<span style="color: Yellow;">Yellow</span>: This is you. You control this fish.
+							</li>
+                            <li>
+								<img class="fa-li" src="img/greenfish.svg" />
+								<span style="color: green;">Green</span>: These fish can be eaten to make you bigger and give you health.
+							</li>
+                            <li>
+								<img class="fa-li" src="img/purplefish.svg" />
+								<span style="color: purple;">Purple</span>: These fish can be eaten to make you bigger, give you health, and give you a temporary power-up. More on power-ups later
+							</li>
+                            <li>
+								<img class="fa-li" src="img/redfish.svg" />
+								<span style="color: red;">Red</span>: These fish can <strong>not</strong> be eaten to make you bigger and will take away health if you touch them.
+							</li>
                         </ul>
                         <p>
                           To eat a fish, you simply run into it's body with your body. Tails have no effect when touched.
                         </p>
                         <p>The power-ups are as follows.</p>
-                        <ul>
-                            <li><i class="fa fa-plane"></i> Fly: This will let you soar through the air as if it was water.</li>
-                            <li><i class="fa fa-fast-forward"></i> Fast: They can't eat you if you can accelerate away from them twice as fast and effortlessly jump of the screen.</li>
-                            <li><i class="fa fa-plus-square"></i> Heal: You magically start healing very quickly.</li>
-                            <li><i class="fa fa-music"></i> Control Song: This eiree song will let the smart ones still stare you down, but their bodies are not under their control.</li>
-                            <li><i class="fa fa-star"></i> Invincibility: This power-up will let you swim right by the big red fish.</li>
-                            <li><i class="fa fa-clock-o"></i> Time Stop: Time stop is most convinient when you are excluded.</li>
-                            <li><i class="fa fa-volume-off"></i> Spawn: Nothing like a small snack to prepare you for the big meal.</li>
-                            <li><i class="fa fa-volume-off"></i> Pac-man: No fish is safe from your hunger.</li>
-                            <li><i class="fa fa-volume-off"></i> Super: This is the ultimate power-up, but can you make it last long enough?</li>
+                        <ul class="fa-ul">
+                            <li><i class="fa fa-li fa-plane"></i> Fly: This will let you soar through the air as if it was water.</li>
+                            <li><i class="fa fa-li fa-fast-forward"></i> Fast: They can't eat you if you can accelerate away from them twice as fast and effortlessly jump of the screen.</li>
+                            <li><i class="fa fa-li fa-plus-square"></i> Heal: You magically start healing very quickly.</li>
+                            <li><i class="fa fa-li fa-music"></i> Control Song: This eiree song will let the smart ones still stare you down, but their bodies are not under their control.</li>
+                            <li><i class="fa fa-li fa-star"></i> Invincibility: This power-up will let you swim right by the big red fish.</li>
+                            <li><i class="fa fa-li fa-clock-o"></i> Time Stop: Time stop is most convinient when you are excluded.</li>
+                            <li><i class="fa fa-li fa-plus-circle"></i> Spawn: Nothing like a small snack to prepare you for the big meal.</li>
+                            <li><i class="fa fa-li fa-smile-o"></i> Pac-man: No fish is safe from your hunger.</li>
+                            <li><i class="fa fa-li fa-bolt"></i> Super: This is the ultimate power-up, but can you make it last long enough?</li>
                         </ul>
                    </div> 
                </div>

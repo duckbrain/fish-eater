@@ -1,6 +1,8 @@
 body {
     background-color: lightblue;
     margin: 0;
+    font-family: FontAwesome;
+    font-size:120%;
 }
 
 canvas#background {
@@ -9,6 +11,15 @@ canvas#background {
     height: 100%;
     margin: 0;
     z-index: 0;
+}
+
+#water {
+  background-color: rgba(0,0,0,.7);
+  position:fixed;
+  top: 0em;
+  left:0;
+  right:0;
+  bottom:0;
 }
 
 #master>div {
@@ -29,7 +40,7 @@ canvas#background {
 }
 
 #header {
-    float: left;
+    /* float: left; */
     text-align: center;
 }
 
@@ -37,14 +48,23 @@ canvas#background {
     vertical-align: middle;
     width: 128px;
     height: 128px;
-    float:center;
+    float: center;
 }
 
 #header h1 {
-    font-size: 500%;
+    font-size: 200%;
     margin: 0;
     vertical-align: middle;
     white-space: normal;
+}
+
+@media (min-width: 55em) {
+  #header img {
+    float: left;
+  }
+  #header {
+    float:left
+  }
 }
 
 #master>#content {
@@ -56,12 +76,12 @@ canvas#background {
 }
 
 .play>a {
-    padding: 1em 2em;
+    padding: 1em 1.5em;
     background-color: #aaa;
     border-radius:1em;
     color: black;
     text-decoration: none;
-    font-size: larger;
+    /* font-size: larger; */
 }
 
 #tabs .tab-content {
@@ -93,10 +113,10 @@ canvas#background {
   min-width: 33.333333%;
 }
 .tab label {
-  padding: 10px; 
+  padding: 10px 0; 
   border: 1px solid #ccc;
   border-radius: 1em;
-  margin: 0 1em;
+  margin: 0 .3em;
   margin-left: -1px; 
   position: relative;
   text-align: center;

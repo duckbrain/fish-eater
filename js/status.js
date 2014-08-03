@@ -37,7 +37,7 @@ Status.prototype = {
         
         for (i = 0; i < this.data.length; ++i) {
             d = this.data[i];
-            ctx.font = d.height * scale + 'px Arial';
+            ctx.font = d.height * scale + 'px FontAwesome';
             if ("text" in d) {
                 ctx.fillStyle = this.color.toString();
                 ctx.fillText(d.title + ": " + d.text, x, y + d.height * scale);
@@ -73,17 +73,19 @@ Status.prototype = {
         ctx.fillStyle = 'rgba(0, 0, 255, 1)';
         ctx.fillRect(game.width - 195, 5, 190 * this.fish.health / 100, 18);
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-        if (this.fish.powerup)
+        if (this.fish.powerup) {
             ctx.fillRect(game.width - 195, 27, 190 * this.fish.powerupRemaining / this.fish.powerup.timeLimit, 7);
+        }
         //text
         ctx.fillStyle = 'rgba(0, 0, 0, 1)'
         ctx.font = '8pt Arial';
         ctx.fillText(String(this.fish.powerupRemaining), game.width - 100, 34);
         ctx.font = '12pt Arial';
         ctx.fillText(String(this.fish.health) + "%", game.width - 100, 20);
-        ctx.font = '10pt Arial';
-        if (this.fish.powerup)
-        ctx.fillText("Power-Up: " + this.fish.powerup.displayText, game.width - 194, 47);
+        ctx.font = '10pt FontAwesome';
+        if (this.fish.powerup) {
+            ctx.fillText("Power-Up: " + this.fish.powerup.displayText, game.width - 194, 47);
+        }
         //ctx.fillText("Time: " + getTimeString(), Width - 194, 62);
         //ctx.fillText("Score: " + String(Math.round(getScore())), Width - 120, 62);
         //Draw mouse controls

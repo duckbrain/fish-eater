@@ -5,6 +5,7 @@ function PlayerFish()
 	this.x = 75;
 	this.y = 75;
 	this.closestEnemy = null;
+	this.hurt = false;
 	
 	//Score trackers
 	this.fishEaten = 0;
@@ -84,6 +85,7 @@ PlayerFish.prototype.onCollision = function(f) {
 	} else {
 		// You get hurt
 		this.health -= f.size / this.size * game.healthLoss;
+		this.hurt = true;
 		if (this.health <= 0) {
 			this.health = 0;
 			this._destroy = true;
@@ -115,6 +117,7 @@ PlayerFish.prototype.preserveBounds = function() {
 };
 
 PlayerFish.prototype.increment = function() {
+	this.hurt = false;
 	this.applyPhysics();
 	if (this.powerup != null && 'increment' in this.powerup) {
 		this.powerup.increment(this);

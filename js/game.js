@@ -1,6 +1,7 @@
 function Game() {
 	// Game constants
 	this.gravity = 1;
+	this.time = 1;//TODO: Allow to be modified for powerups or refresh rate
 	this.friction = 15;
 	this.waterLevel = 0;
 	this.width = 1000;
@@ -81,7 +82,7 @@ Game.prototype = {
 	lose: function() {
 		this.gameOver = true;
 		this.setPaused("You Lose");
-		this.setMusic("loose.mp3");
+		this.setMusic("lose.mp3");
 	},
 	
 	getMusic: function() { return this._music; },
@@ -154,7 +155,7 @@ Game.prototype = {
 	
 	setup: function() {
 		f = new PlayerFish();
-		f.size = 10;
+		f.size = 30;
 		f.setController(new GroupController(new KeyController, new TouchController(-1)));
 		this.players.push(f);
 		this.drawablesTop.push(new Status(f));
@@ -180,7 +181,7 @@ Game.prototype = {
 		this.players = [];
 		this.enemies = [];
 		this.drawablesTop = [this.water];
-	this.drawablesBottom = [this.sun];
+		this.drawablesBottom = [this.sun];
 		this.init();
 		this.setup();
 	},
@@ -203,19 +204,31 @@ Game.prototype = {
 			return;
 		
 		//Determine if a new fish needs to be added
-		if (game.enemies.length < 500 / this.smallestPlayer.size)
+		if (game.enemies.length < 500 / this.smallestPlayer.size) {
 			this.newFish();
+		}
 		
 		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.ctx.fillStyle = this.backgroundColor;
 		this.ctx.fillRect(this.xPan, this.yPan, this.width * this.scale, this.height * this.scale);
 		
+		function loopArray(array) {
+			for (i = 0; i < array.length; ++i) {
+				var f = array[i];
+				if (!paused) {
+					f.increment();
+				}
+				f.draw(game.ctx);
+			}
+		} 
+		
 		// Loop Elements
-		for (i = 0; i < this.drawablesBottom.length; ++i) {
-			var f = this.drawablesBottom[i];
-			if (!paused)
-				f.increment();
-			f.draw(this.ctx);
+		loopArray(this.drawablesBottom);
+		
+		for (i = 0; i < this.players.length; ++i) {
+			if (!paused) {
+				this.players[i].increment();
+			}
 		}
 		
 		for (i = 0; i < this.enemies.length; ++i) {
@@ -239,12 +252,9 @@ Game.prototype = {
 			else
 				f.draw(this.ctx);
 		}
+		
 		for (i = 0; i < this.players.length; ++i) {
-			var f = this.players[i];
-			if (!paused) {
-				f.increment();
-			}
-			f.draw(this.ctx);
+			this.players[i].draw(game.ctx);
 		}
 		
 		// Cover edges
@@ -253,12 +263,7 @@ Game.prototype = {
 		this.ctx.fillRect(this.canvas.width - this.xPan,0,this.xPan, this.canvas.height);
 		this.ctx.fillRect(0, this.yPan + this.height * this.scale, this.width * this.scale, this.canvas.height);
 		
-		for (i = 0; i < this.drawablesTop.length; ++i) {
-			var f = this.drawablesTop[i];
-			if (!paused)
-				f.increment();
-			f.draw(this.ctx);
-		}
+		loopArray(this.drawablesTop);
 		
 		if (!this.getPaused())
 			this.checkGameOver();
@@ -280,11 +285,9 @@ Game.prototype = {
 		else {
 			f = new EnemyFish();
 		}
-		if (f.size > this.maxSize)
-			f.size = this.maxSize;
 		f.y = Math.random() * this.height;
 		var avgSize = this.smallestPlayer.size;
-		f.size = Math.min(Math.random() * avgSize * 3 / 2 + avgSize / 2, 200);
+		f.size = Math.max(Math.min(Math.random() * avgSize * 3 / 2 + avgSize / 2, 200), 20);
 		f.velX = Math.random() * f.size / 7 - f.size / 14;
 		if (Math.abs(f.velX) < 1)
 			if (f.velX > 0)
