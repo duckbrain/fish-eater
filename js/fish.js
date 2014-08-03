@@ -13,7 +13,7 @@ Fish = function() {
 	this.tailDivideFactor = .5;
 	this.tailLengthenFactor = 1;
 	this.tailSpinFactor = 0;
-	this.speed = 2;
+	this.speed = 1;
 	this._controller = null;	
 	this.facingRight = true;
 	

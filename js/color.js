@@ -25,7 +25,7 @@ Color.prototype = {
 	    }
 	    if(this.r == max)
     		hsv.h = ( this.g - this.b ) / delta;		// between yellow & magenta
-	    else if( g == max )
+	    else if( this.g == max )
 			hsv.h = 2 + ( this.b - this.r ) / delta;	// between cyan & yellow
 		else
 			hsv.h = 4 + ( this.r - this.g ) / delta;	// between magenta & cyan

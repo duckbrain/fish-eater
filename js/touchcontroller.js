@@ -3,6 +3,7 @@ TouchController = function(bound) {
 	this.myTouch = null;
 	this.controlSize = 30;
 	this.controlColor = 'red';
+	this.pauseTime = 300;
 	this.bound = bound || 0; // -1 for left, 1 for right, 0 for fullscreen
 	
 	this.xStart = NaN;
@@ -10,6 +11,7 @@ TouchController = function(bound) {
 	this.x = NaN;
 	this.y = NaN;
 	this.leftCircle = false;
+	this.timeDown = null;
 	
 	this.onTouchStart = function(e) {
 		e.preventDefault();
@@ -33,6 +35,7 @@ TouchController = function(bound) {
 			self.myTouch = id;
 			self.x = x;
 			self.y = y;
+			self.timeDown = new Date();
 			self.xStart = x;
 			self.yStart = y;
 			self.leftCircle = false;
@@ -61,7 +64,8 @@ TouchController = function(bound) {
 		} else {
 			for (var i in e.changedTouches) {
 				if (e.pointerId == self.myTouch || e.changedTouches[i].identifier == self.myTouch) {
-					if (!self.leftCircle) {
+					
+					if (!self.leftCircle && new Date() - self.timeDown <= self.pauseTime) {
 						game.togglePaused();
 					}
 					self.myTouch = null;
@@ -101,7 +105,7 @@ TouchController = function(bound) {
 		
 		var xd = self.x - self.xStart;
 		var yd = self.y - self.yStart;
-		var dist = Math.min(Math.sqrt(xd*xd + yd*yd), controlSize)
+		var dist = Math.min(Math.sqrt(xd*xd + yd*yd), self.controlSize) / self.controlSize;
 		var angle = Math.atan2(self.yStart - self.y, self.xStart - self.x) / Math.PI;
 		var overlap = 0.15;
 		self.up = (angle >= 0.25-overlap) && (angle <= 0.75+overlap);
@@ -114,12 +118,13 @@ TouchController = function(bound) {
 		self.left = self.left ? dist : 0;
 		self.right = self.right ? dist : 0;
 
-		self.leftCircle = true;
+		self.leftCircle = dist == 1;
 		if (game.getPaused())
 			game.loop();
 	};
 	
-	this.increment = function() {};
+	this.increment = function() {
+	};
 	
 	this.draw = function(ctx) {
 		if (this.myTouch != null)

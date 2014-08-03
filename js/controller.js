@@ -9,21 +9,28 @@ function PlayerController() {
 }
 PlayerController.prototype = {
 	apply: function(fish) {
-		
-		function applyValue() {
-			
+		function applyValue(val, vel, dir) {
+			if (typeof(val) === 'number') {
+				fish[vel] += fish.speed * val * dir; 
+			} else {
+				if (val) { 
+					fish[vel] += fish.speed * dir; 
+				}
+			}
 		}
 		
 		//if (typeof())
 		
-		if (this.up) fish.velY -= fish.speed;
-		if (this.down) fish.velY += fish.speed;
-		if (this.left) fish.velX -= fish.speed;
-		if (this.right) fish.velX += fish.speed;
-		if (this.left != this.right)
+		applyValue(this.up, 'velY', -1);
+		applyValue(this.down, 'velY', 1);
+		applyValue(this.left, 'velX', -1);
+		applyValue(this.right, 'velX', 1);
+		if ((this.left > 0) ^ (this.right > 0)) {
 			fish.facingRight = this.right;
-		if (this.depower)
+		}
+		if (this.depower) {
 			fish.setPowerup(null);
+		}
 	},
 	init: function() {},
 	deinit: function() {}
@@ -38,12 +45,21 @@ function GroupController() {
 	
 	this.apply = function(fish) {
 		var self = this._;
-		this._.right = this._.left = this._.down = this._.up = false;
-		this.controllers.forEach(function(c) { 
-			if (c.up) self.up = true;
-			if (c.down) self.down = true;
-			if (c.left) self.left = true;
-			if (c.right) self.right = true;
+		this._.right = this._.left = this._.down = this._.up = 0;
+		this.controllers.forEach(function(c) {
+			function applyValue(name) {
+				if (typeof(c[name]) !== 'number') {
+					c[name] = c[name] ? 1 : 0;
+				}
+				if (c[name]) {
+					self[name] = Math.min(self[name] + c[name], 1);
+				}
+			}
+			
+			applyValue('up');
+			applyValue('down');
+			applyValue('left');
+			applyValue('right');
 			if (c.depower)
 				fish.setPowerup(null);
 		});

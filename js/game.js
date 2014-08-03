@@ -69,8 +69,11 @@ Game.prototype = {
 					this._mp3s[this._music].pause();
 				this._interval = null;
 			}
+			document.getElementById('back').style.display
+				//= document.getElementById('menu').style.display
+				= val ? 'block' : 'none';
+			this.loop();
 		}
-		this.loop();
 	},
 	togglePaused: function() { this.setPaused(!this.getPaused()); },
 	
@@ -156,14 +159,15 @@ Game.prototype = {
 	setup: function() {
 		f = new PlayerFish();
 		f.size = 30;
-		f.setController(new GroupController(new KeyController, new TouchController(-1)));
+		f.setController(new GroupController(new KeyController(), new TouchController()));
+		//f.setController(new TouchController());
 		this.players.push(f);
 		this.drawablesTop.push(new Status(f));
 		
-		g = new PlayerFish();
-		g.size = 10;
-		g.x = 300;
-		g.y = 75;
+		//g = new PlayerFish();
+		//g.size = 10;
+		//g.x = 300;
+		//g.y = 75;
 		//g.setController(new GroupController(new KeyController("wasd"), new TouchController(1)));
 		//game.players.push(g);
 		
