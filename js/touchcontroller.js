@@ -106,9 +106,9 @@ TouchController = function(bound) {
 		var xd = self.x - self.xStart;
 		var yd = self.y - self.yStart;
 		var dist = Math.min(Math.sqrt(xd*xd + yd*yd), self.controlSize) / self.controlSize;
-		var angle = Math.atan2(self.yStart - self.y, self.xStart - self.x) / Math.PI;
+		var angle = Math.atan2(self.yStart - self.y, self.xStart - self.x);
 		var overlap = 0.15;
-		self.up = (angle >= 0.25-overlap) && (angle <= 0.75+overlap);
+		/*self.up = (angle >= 0.25-overlap) && (angle <= 0.75+overlap);
 		self.down = (angle <= -0.25+overlap) && (angle >= -0.75-overlap);
 		self.left = (angle > 0 && angle <= 0.25+overlap) || (angle < 0 && angle >= -0.25-overlap);
 		self.right = (angle >= 0.75-overlap) || (angle <= -0.75+overlap);
@@ -116,7 +116,25 @@ TouchController = function(bound) {
 		self.up = self.up ? dist : 0;
 		self.down = self.down ? dist : 0;
 		self.left = self.left ? dist : 0;
-		self.right = self.right ? dist : 0;
+		self.right = self.right ? dist : 0;*/
+		
+		if (yd < 0) {
+			self.up = Math.sin(angle) * dist;
+			self.down = 0;
+		}
+		else {
+			self.up = 0
+			self.down = Math.sin(angle) * dist * -1;
+		}
+		if (xd < 0) {
+			self.left = Math.cos(angle) * dist;
+			self.right = 0;
+		} else {
+			self.left = 0;
+			self.right = Math.cos(angle) * dist * -1;
+		}
+		console.log(Math.sin(angle) + ", " + Math.cos(angle))
+			
 
 		self.leftCircle = dist == 1;
 		if (game.getPaused())
