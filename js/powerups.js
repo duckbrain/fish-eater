@@ -126,7 +126,7 @@ function InvinciblePowerUp() {
 	}
 	this.onCollision = function() { }
 }
-InvinciblePowerUp.prototype = new PowerUp("\uf005 Invincible", "invincable.mp3", 500, ['getColor', 'distanceTo']);
+InvinciblePowerUp.prototype = new PowerUp("\uf005 Invincible", "invincible.mp3", 500, ['getColor', 'distanceTo']);
 InvinciblePowerUp.prototype.getColor = function() {
 	return ('#0' + Math.round(0xffffff * Math.random())
 		.toString(16)).replace(/^#0([0-9a-f]{6})$/i, '#$1');

@@ -4,7 +4,7 @@ audio/background.mp3
 audio/fast.mp3
 audio/fly.mp3
 audio/heal.mp3
-audio/invincable.mp3
+audio/invincible.mp3
 audio/lose.mp3
 audio/pacman.mp3
 audio/song.mp3
@@ -36,7 +36,6 @@ js/fish.js
 js/game.js
 js/intro.js
 js/keycontroller.js
-js/knockout.js
 js/options.js
 js/padcontroller.js
 js/playerfish.js
