@@ -3,7 +3,7 @@ TouchController = function(bound) {
 	this.myTouch = null;
 	this.controlSize = 30;
 	this.controlColor = 'red';
-	this.pauseTime = 300;
+	this.pauseTime = 100;
 	this.bound = bound || 0; // -1 for left, 1 for right, 0 for fullscreen
 	
 	this.xStart = NaN;
