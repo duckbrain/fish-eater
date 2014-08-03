@@ -3,11 +3,12 @@ TouchController = function(bound) {
 	this.myTouch = null;
 	this.controlSize = 30;
 	this.controlColor = 'red';
-	this.pauseTime = 100;
+	this.pauseTime = 300;
 	this.bound = bound || 0; // -1 for left, 1 for right, 0 for fullscreen
 	
 	this.xStart = NaN;
 	this.yStart = NaN;
+	this.lastTap = false;
 	this.x = NaN;
 	this.y = NaN;
 	this.leftCircle = false;
@@ -47,34 +48,37 @@ TouchController = function(bound) {
 		if (self.myTouch == null)
 			return;
 		e.preventDefault();
+		
+		function handle() {
+			if (!self.leftCircle && new Date() - self.timeDown <= self.pauseTime) {
+				if (self.lastTap) {
+					game.togglePaused();
+					self.lastTap = false;
+				} else {
+					self.depower = true;
+					self.lastTap = true
+				}	
+			} else {
+				self.lastTap = false;
+			}
+			self.myTouch = null;
+			self.x = NaN;
+			self.y = NaN;
+			self.up = false;
+			self.down = false;
+			self.left = false;
+			self.right = false;
+		}
+		
 		if (e.pointerId) {
 			if (e.pointerId== self.myTouch) {
-				if (!self.leftCircle) {
-					game.togglePaused();
-				}
-				self.myTouch = null;
-				self.x = NaN;
-				self.y = NaN;
-				self.up = false;
-				self.down = false;
-				self.left = false;
-				self.right = false;
+				handle();
 			}
 			else return;
 		} else {
 			for (var i in e.changedTouches) {
 				if (e.pointerId == self.myTouch || e.changedTouches[i].identifier == self.myTouch) {
-					
-					if (!self.leftCircle && new Date() - self.timeDown <= self.pauseTime) {
-						game.togglePaused();
-					}
-					self.myTouch = null;
-					self.x = NaN;
-					self.y = NaN;
-					self.up = false;
-					self.down = false;
-					self.left = false;
-					self.right = false;
+					handle();
 					break;
 				}
 			}
@@ -142,6 +146,7 @@ TouchController = function(bound) {
 	};
 	
 	this.increment = function() {
+		self.depower = false;
 	};
 	
 	this.draw = function(ctx) {
