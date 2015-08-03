@@ -1,6 +1,6 @@
 {
   "name": "Fish Eater",
-  "description": "A simple game featuring fish, where you must eat the smaller fish to become big and rule the pond.",
+  "description": "A fun, simple game featuring fish, where you must eat the smaller fish to become big and rule the pond.",
   "version": "4.0.0",
   "app": {
     "launch": {
