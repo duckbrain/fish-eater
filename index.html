@@ -1,23 +1,25 @@
 <!DOCTYPE HTML>
 <html manifest="manifest.appcache">
+
 <head>
     <title>Fish Eater</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
-	<link rel="apple-touch-icon" href="img/icon_96.png">
-	<link rel="icon" type="image/png" href="img/icon_16.png">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="img/icon_96.png">
+    <link rel="icon" type="image/png" href="img/icon_16.png">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/intro.css">
     <script src="js/color.js"></script>
     <script src="js/extras.js"></script>
     <script src="js/intro.js"></script>
 </head>
+
 <body>
     <canvas id="background"></canvas>
-	<div id="water"></div>
+    <div id="water"></div>
     <div id="master">
         <div id="header">
-			<img src="img/icon_128.png">
+            <img src="img/icon_128.png">
             <h1>Fish Eater</h1>
             <h2>Developed by Jonathan Duck</h2>
             <p class="play">
@@ -27,102 +29,145 @@
         </div>
         <div id="content">
             <div class="tabs">
-    
-               <div class="tab">
-                   <input type="radio" id="Instructions" name="tab-group" checked>
-                   <label for="Instructions">Instructions</label>
-                   <div class="content">
+
+                <div class="tab">
+                    <input type="radio" id="Instructions" name="tab-group" checked>
+                    <label for="Instructions">Instructions</label>
+                    <div class="content">
                         <h3>How to play Fish Eater:</h3>
                         <p>
-                            In Fish Eater you play as a little fish in a big pond. You must become the best by becoming the biggest.
-                            Fish Eater is mainly played by using either the <i class="fa fa-arrows"></i> arrow keys; the W, A, S, and D keys; or the new <i class="fa fa-mobile"></i> touch screen joystick.
+                            In Fish Eater you play as a little fish in a big pond. You must become the best by becoming
+                            the biggest.
+                            Fish Eater is mainly played by using either the <i class="fa fa-arrows"></i> arrow keys; the
+                            W, A, S, and D keys; or the new <i class="fa fa-mobile"></i> touch screen joystick.
                             You may use the keys to move in any direction in the water. Your goal is simple: eat
                             smaller fish to become bigger. Fish are colored according to if you may eat them or not.
                         </p>
-						<h4>Controls</h4>
-						<ul class="fa-ul">
-							<li><i class="fa fa-li fa-keyboard-o"></i> The directional arrow keys or the WASD keys can be used to control the fish</li>
-							<li><i class="fa fa-li fa-mobile"></i> Touch anywhere on the game area and drag to make a joystick.</li>
-							<li><i class="fa fa-li fa-keyboard-o"></i> Press T to remove your powerup.</li>
-							<li><i class="fa fa-li fa-mobile"></i> Touch anywhere on the game area twice in a row to cancel your powerup. If you have no powerup it wil pause. Tap again to unpause.</li>
-							<li><i class="fa fa-li fa-keyboard-o"></i> Click on the game area or press the spacebar to toggle the pause.</li>
-						</ul>
-                        <p>The colorings are as follows.</p>
+                        <h4>Controls</h4>
                         <ul class="fa-ul">
-							<li>
-								<img class="fa-li fish" src="img/yellowfish.svg" />
-								<span style="color: Yellow;">Yellow</span>: This is you. You control this fish.
-							</li>
+                            <li><i class="fa fa-li fa-keyboard-o"></i> The directional arrow keys or the WASD keys can
+                                be used to control the fish</li>
+                            <li><i class="fa fa-li fa-mobile"></i> Touch anywhere on the game area and drag to make a
+                                joystick.</li>
+                            <li><i class="fa fa-li fa-keyboard-o"></i> Press T to remove your powerup.</li>
+                            <li><i class="fa fa-li fa-mobile"></i> Touch anywhere on the game area twice in a row to
+                                cancel your powerup. If you have no powerup it wil pause. Tap again to unpause.</li>
+                            <li><i class="fa fa-li fa-keyboard-o"></i> Click on the game area or press the spacebar to
+                                toggle the pause.</li>
+                        </ul>
+                        <p>The colors are as follows.</p>
+                        <ul>
                             <li>
-								<img class="fa-li fish-small" src="img/greenfish.svg" />
-								<span style="color: green;">Green</span>: These fish can be eaten to make you bigger and give you health.
-							</li>
+                                <img class="fish" src="img/yellowfish.svg" />
+                                <span style="color: Yellow;">Yellow</span>: This is you. You control this fish.
+                            </li>
                             <li>
-								<img class="fa-li fish-small" src="img/purplefish.svg" />
-								<span style="color: purple;">Purple</span>: These fish can be eaten to make you bigger, give you health, and give you a temporary power-up. More on power-ups later
-							</li>
+                                <img class="fish-small" src="img/greenfish.svg" />
+                                <span style="color: green;">Green</span>: These fish can be eaten to make you bigger and
+                                give you health.
+                            </li>
                             <li>
-								<img class="fa-li fish-big" src="img/redfish.svg" />
-								<span style="color: red;">Red</span>: These fish can <strong>not</strong> be eaten to make you bigger and will take away health if you touch them.
-							</li>
+                                <img class="fish-small" src="img/purplefish.svg" />
+                                <span style="color: purple;">Purple</span>: These fish can be eaten to make you bigger,
+                                give you health, and give you a temporary power-up. More on power-ups later.
+                            </li>
+                            <li>
+                                <img class="fish-big" src="img/redfish.svg" />
+                                <span style="color: red;">Red</span>: These fish can <strong>not</strong> be eaten to
+                                make you bigger and will take away health if you touch them.
+                            </li>
                         </ul>
                         <p>
-                          To eat a fish, you simply run into it's body with your body. Tails have no effect when touched.
+                            To eat a fish, you simply run into it's body with your body. Tails have no effect when
+                            touched.
                         </p>
                         <p>The power-ups are as follows.</p>
                         <ul class="fa-ul">
-                            <li><i class="fa fa-li fa-plane"></i> Fly: This will let you soar through the air as if it was water.</li>
-                            <li><i class="fa fa-li fa-fast-forward"></i> Fast: They can't eat you if you can accelerate away from them twice as fast and effortlessly jump of the screen.</li>
-                            <li><i class="fa fa-li fa-plus-square"></i> Heal: You magically start healing very quickly.</li>
-                            <li><i class="fa fa-li fa-music"></i> Control Song: This eiree song will let the smart ones still stare you down, but their bodies are not under their control.</li>
-                            <li><i class="fa fa-li fa-star"></i> Invincibility: This power-up will let you swim right by the big red fish.</li>
-                            <li><i class="fa fa-li fa-clock-o"></i> Time Stop: Time stop is most convinient when you are excluded.</li>
+                            <li><i class="fa fa-li fa-plane"></i> Fly: This will let you soar through the air as if it
+                                was water.</li>
+                            <li><i class="fa fa-li fa-fast-forward"></i> Fast: They can't eat you if they can't catch
+                                you. This lets you can accelerate twice as fast and jump high off-screen.</li>
+                            <li><i class="fa fa-li fa-plus-square"></i> Heal: You magically start to heal very quickly.
+                            </li>
+                            <li><i class="fa fa-li fa-music"></i> Control Song: This eerie song will force fish to swim
+                                to the surface, but be careful, some are too smart to fall for the trick.</li>
+                            <li><i class="fa fa-li fa-star"></i> Invincibility: This power-up will let you swim right
+                                past the big red fish.</li>
+                            <li><i class="fa fa-li fa-clock-o"></i> Time Stop: This can help pick up some easy snacks or
+                                avoid danger.</li>
                             <!--li><i class="fa fa-li fa-plus-circle"></i> Spawn: Nothing like a small snack to prepare you for the big meal.</li-->
                             <li><i class="fa fa-li fa-smile-o"></i> Pac-man: No fish is safe from your hunger.</li>
-                            <li><i class="fa fa-li fa-bolt"></i> Super: This is the ultimate power-up, but can you make it last long enough?</li>
+                            <li><i class="fa fa-li fa-bolt"></i> Super: This is the ultimate power-up, but can you make
+                                it last long enough?</li>
                         </ul>
-                   </div> 
-               </div>
-
-               <div class="tab">
-                   <input type="radio" id="Options" name="tab-group">
-                   <label for="Options">Options</label>
-                   <div class="content">
-                       <h1>Options</h1>
-						<p>This isn't the page your looking for. Move along. (Coming soon to an update near you.)</p>
-                   </div> 
-               </div>
+                    </div>
+                </div>
 
                 <div class="tab">
-                   <input type="radio" id="About" name="tab-group">
-                   <label for="About">About</label>
-                   <div class="content">
-                       <h1>About Fish Eater</h1>
-					   <h3>Version 4.0.0</h3>
-					   <p>Fish Eater is a little game developed by me, Jonathan Duck, for free of charge. Up to this point I have received no compensation for this work, but I do plan to add some ads, so please bear with me when I do.</p>
-					   <p>Technical: Fish Eater was first written in C# as a quick little game drawn with GDI+. When I read about HTML5 and the canvas, I decided to try it out. The first release of the Chrome App was a litteral copy and paste, then patch it up just enough to work in JavaScript. It has since been rewritten from scratch.</p>
-					   <h3>What's New</h3>
-					   <h4>4.0.0</h4>
-					   <ul>
-					   	<li>Complete Rewrite</li>
-					   	<li>This About Screen you are looking at</li>
-						<li>Touch screen support</li>
-						<li>*Fast has been toned down!</li>
-						<li>No more Spawn powerup. It may or may not come back.</li>
-						<li>Lots of pretty icons thanks to <i class="fa fa-flag"></i> Font Awesome</li>
-					   </ul>
-					   <h3>Credits</h3>
-					   <ul class="fa-ul">
-					   	<li><i class="fa fa-li fa-code"></i><a href="mailto:jonathan.c.duck@gmail.com">Jonathan Duck</a></li>
-						<li><i class="fa fa-li fa-music"></i><a href="http://incompetech.com/music/royalty-free/">Kevin MacLeod - Incompetech</a></li>
-						<li><i class="fa fa-li fa-flag"></i><a href="http://fortawesome.github.io/Font-Awesome/">Dave Gandy - Font Awesome</a></li>
-					   </ul>
-					   <p>Fish Eater belongs to Jonathan Duck. You are not authorized to distribute, modify, or illegally use this software. If you do want to do something with it, just contact me. You are more than welcome to advertise it. I hope to soon be getting it on an actual web server.</p>
-                   </div> 
-               </div>
+                    <input type="radio" id="Options" name="tab-group">
+                    <label for="Options">Options</label>
+                    <div class="content">
+                        <h1>Options</h1>
+                        <p>This isn't the page you're looking for. Move along. (Coming soon to an update near you.)</p>
+                    </div>
+                </div>
+
+                <div class="tab">
+                    <input type="radio" id="About" name="tab-group">
+                    <label for="About">About</label>
+                    <div class="content">
+                        <h1>About Fish Eater</h1>
+                        <h3>Version 4.0.0</h3>
+                        <p>Fish Eater is a little game developed by me, Jonathan Duck.</p>
+                        <p>Technical: Fish Eater was first written in C# as a quick little game drawn with GDI+. When I
+                            read about HTML5 and the canvas, I decided to try it out. The first release of the Chrome
+                            App was a literal copy and paste, then patch it up just enough to work in JavaScript. It has
+                            since been rewritten from scratch.</p>
+                        <h3>What's New</h3>
+                        <h4>4.0.0</h4>
+                        <ul>
+                            <li>Complete Rewrite</li>
+                            <li>This About Screen you are looking at</li>
+                            <li>Touch screen support</li>
+                            <li>*Fast has been toned down!</li>
+                            <li>No more Spawn powerup. It may or may not come back.</li>
+                            <li>Lots of pretty icons thanks to <i class="fa fa-flag"></i> Font Awesome</li>
+                        </ul>
+                        <h3>Credits</h3>
+                        <ul class="fa-ul">
+                            <li><i class="fa fa-li fa-code"></i><a href="mailto:jonathan.c.duck@gmail.com">Jonathan
+                                    Duck</a></li>
+                            <li><i class="fa fa-li fa-music"></i><a
+                                    href="http://incompetech.com/music/royalty-free/">Kevin MacLeod - Incompetech</a>
+                            </li>
+                            <li><i class="fa fa-li fa-flag"></i><a
+                                    href="http://fortawesome.github.io/Font-Awesome/">Dave Gandy - Font Awesome</a></li>
+                        </ul>
+                        <p>The game code is released under MIT license. Check it out on GitHub. <i
+                                class="fa fa-github"></i> <a
+                                href="https://github.com/duckbrain/fish-eater">duckbrain/fish-eater</a>. The Android app
+                            is property of Jonathan Duck, do not redistribute.</p>
+                        <div style="float: right; text-align: center;">
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                <input type="hidden" name="cmd" value="_donations" />
+                                <input type="hidden" name="business" value="D6V2G7DSMPAUS" />
+                                <input type="hidden" name="currency_code" value="USD" />
+                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                                <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+                                </form>
+                            <a href='https://play.google.com/store/apps/details?id=us.duckfam.fisheater&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' style="width: 130px" /></a>
+                        </div>
+                        
+                        <h3>Dontate</h3>
+                        <p>If you are interested in donating to development, you can either use the PayPal donation link above or buy the app on Google Play</p>
+                        <p>&copy; Google Play and the Google Play logo are trademarks of Google LLC.</p>
+                            
+                    </div>
+                </div>
 
             </div>
         </div>
     </div>
 </body>
+
 </html>
