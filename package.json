@@ -1,9 +1,13 @@
 {
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "format": "prettier -w ."
   },
   "devDependencies": {
     "vite": "^3.1.1"
+  },
+  "dependencies": {
+    "prettier": "^3.2.4"
   }
 }
