@@ -1,4 +1,5 @@
 # Fish Eater
+
 A simple game featuring fish, where you must eat the smaller fish to become big and rule the pond.
 
 ![logo](img/icon_128.png)

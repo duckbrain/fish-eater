@@ -1,24 +1,28 @@
 body {
-    background-color: lightblue;
-    margin: 0;
-    font-family: FontAwesome;
-    font-size:120%;
+  background-color: lightblue;
+  margin: 0;
+  font-family: FontAwesome;
+  font-size: 120%;
 }
 
-a, a:hover, a:focus, a:visited, a:active {
-  color:lightblue;
+a,
+a:hover,
+a:focus,
+a:visited,
+a:active {
+  color: lightblue;
 }
 
 strong {
-  color:red;
+  color: red;
 }
 
 .fish {
-  height: .9em;
+  height: 0.9em;
 }
 
 .fish-small {
-  height: .6em;
+  height: 0.6em;
 }
 
 .fish-big {
@@ -26,56 +30,56 @@ strong {
 }
 
 canvas#background {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    z-index: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: 0;
 }
 
 #water {
-  background-color: rgba(0,0,0,.7);
-  position:fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
   top: 0em;
-  left:0;
-  right:0;
-  bottom:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-#master>div {
-    background-color: rgba(0,0,0,.7);
-    color: white;
-    border-radius: 3em;
-    padding: 2em;
-    margin: 2em 1em;
+#master > div {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 3em;
+  padding: 2em;
+  margin: 2em 1em;
 }
 
-#master{
-    z-index: 999;
-    position: absolute;
-    vertical-align: middle;
-    width: 100%;
-    height:  100%;
-    /* margin: 2em 1em; */
+#master {
+  z-index: 999;
+  position: absolute;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  /* margin: 2em 1em; */
 }
 
 #header {
-    /* float: left; */
-    text-align: center;
+  /* float: left; */
+  text-align: center;
 }
 
 #header img {
-    vertical-align: middle;
-    width: 128px;
-    height: 128px;
-    float: center;
+  vertical-align: middle;
+  width: 128px;
+  height: 128px;
+  float: center;
 }
 
 #header h1 {
-    font-size: 200%;
-    margin: 0;
-    vertical-align: middle;
-    white-space: normal;
+  font-size: 200%;
+  margin: 0;
+  vertical-align: middle;
+  white-space: normal;
 }
 
 @media (min-width: 55em) {
@@ -83,47 +87,47 @@ canvas#background {
     float: left;
   }
   #header {
-    float:left
+    float: left;
   }
 }
 
-#master>#content {
-    overflow-x: hidden;
+#master > #content {
+  overflow-x: hidden;
 }
 
 .play {
-    margin-top: 3em;
+  margin-top: 3em;
 }
 
-.play>a {
-    padding: 1em 1.5em;
-    background-color: #aaa;
-    border-radius:1em;
-    color: black;
-    text-decoration: none;
-    /* font-size: larger; */
+.play > a {
+  padding: 1em 1.5em;
+  background-color: #aaa;
+  border-radius: 1em;
+  color: black;
+  text-decoration: none;
+  /* font-size: larger; */
 }
 
 #tabs .tab-content {
-    display: none;
+  display: none;
 }
-#tabs>div:target .tab-content {
-    display:block;
+#tabs > div:target .tab-content {
+  display: block;
 }
 
 ::-webkit-scrollbar {
   background: transparent;
-  width: .5em;
+  width: 0.5em;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.3);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 1em;
-  width: .4em;
+  width: 0.4em;
 }
 
 .tabs {
-  position: relative;   
+  position: relative;
   min-height: 700px; /* This part sucks */
   clear: both;
   margin: 25px 0;
@@ -133,19 +137,19 @@ canvas#background {
   min-width: 33.333333%;
 }
 .tab label {
-  padding: 10px 0; 
+  padding: 10px 0;
   border: 1px solid #ccc;
   border-radius: 1em;
-  margin: 0 .3em;
-  margin-left: -1px; 
+  margin: 0 0.3em;
+  margin-left: -1px;
   position: relative;
   text-align: center;
   left: 1px;
   display: block;
   cursor: pointer;
 }
-.tab [type=radio] {
-  display: none;   
+.tab [type="radio"] {
+  display: none;
 }
 .content {
   position: absolute;
@@ -157,10 +161,10 @@ canvas#background {
   display: none;
   margin-bottom: 1em;
 }
-[type=radio]:checked ~ label {
-  background: rgba(255,255,0,.3);
+[type="radio"]:checked ~ label {
+  background: rgba(255, 255, 0, 0.3);
   z-index: 2;
 }
-[type=radio]:checked ~ label ~ .content {
+[type="radio"]:checked ~ label ~ .content {
   display: block;
 }
