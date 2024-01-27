@@ -36,7 +36,6 @@ js/fish.js
 js/game.js
 js/intro.js
 js/keycontroller.js
-js/options.js
 js/padcontroller.js
 js/playerfish.js
 js/powerups.js
