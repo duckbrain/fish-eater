@@ -86,6 +86,7 @@ canvas#background {
   #header img {
     float: left;
   }
+
   #header {
     float: left;
   }
@@ -111,6 +112,7 @@ canvas#background {
 #tabs .tab-content {
   display: none;
 }
+
 #tabs > div:target .tab-content {
   display: block;
 }
@@ -128,14 +130,17 @@ canvas#background {
 
 .tabs {
   position: relative;
-  min-height: 700px; /* This part sucks */
+  min-height: 700px;
+  /* This part sucks */
   clear: both;
   margin: 25px 0;
 }
+
 .tab {
   float: left;
   min-width: 33.333333%;
 }
+
 .tab label {
   padding: 10px 0;
   border: 1px solid #ccc;
@@ -148,12 +153,14 @@ canvas#background {
   display: block;
   cursor: pointer;
 }
+
 .tab [type="radio"] {
   display: none;
 }
+
 .content {
   position: absolute;
-  top: 28px;
+  top: 50px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -161,10 +168,16 @@ canvas#background {
   display: none;
   margin-bottom: 1em;
 }
+
+.content h1 {
+  margin-top: 0;
+}
+
 [type="radio"]:checked ~ label {
   background: rgba(255, 255, 0, 0.3);
   z-index: 2;
 }
+
 [type="radio"]:checked ~ label ~ .content {
   display: block;
 }

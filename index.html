@@ -14,22 +14,38 @@
       import { Browser } from "./js/browser";
 
       const game = new Game(new Browser());
-      game.reset();
+      const masterEl = document.getElementById("master");
+      const backButton = document.getElementById("back");
+      const playButton = document.getElementById("play-button");
+      backButton.style.display = "none";
+      game.demo();
+
+      playButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        game.reset();
+        masterEl.style.display = "none";
+      });
+      backButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        game.demo();
+        masterEl.style.display = "";
+        backButton.style.display = "none";
+      });
     </script>
   </head>
 
   <body>
     <canvas id="canvas"></canvas>
     <div id="back">
-      <a href="index.html"><i class="fa fa-caret-square-o-left fa-3x"></i></a>
+      <a href="#"><i class="fa fa-caret-square-o-left fa-3x"></i></a>
     </div>
-    <div id="master" style="display: none">
+    <div id="master">
       <div id="header">
         <img src="img/icon_128.png" />
         <h1>Fish Eater</h1>
         <h2>Developed by Jonathan Duck</h2>
         <p class="play">
-          <a href="game.html"><i class="fa fa-play"></i> Play Now</a>
+          <a id="play-button" href="#"><i class="fa fa-play"></i> Play Now</a>
           <!--a href="index.html" id="mute-button"><i class="fa fa-volume-off"></i></a-->
         </p>
       </div>
@@ -211,30 +227,6 @@
                 redistribute.
               </p>
               <div style="float: right; text-align: center">
-                <form
-                  action="https://www.paypal.com/cgi-bin/webscr"
-                  method="post"
-                  target="_top"
-                >
-                  <input type="hidden" name="cmd" value="_donations" />
-                  <input type="hidden" name="business" value="D6V2G7DSMPAUS" />
-                  <input type="hidden" name="currency_code" value="USD" />
-                  <input
-                    type="image"
-                    src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
-                    border="0"
-                    name="submit"
-                    title="PayPal - The safer, easier way to pay online!"
-                    alt="Donate with PayPal button"
-                  />
-                  <img
-                    alt=""
-                    border="0"
-                    src="https://www.paypal.com/en_US/i/scr/pixel.gif"
-                    width="1"
-                    height="1"
-                  />
-                </form>
                 <a
                   href="https://play.google.com/store/apps/details?id=us.duckfam.fisheater&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
                   ><img
@@ -246,8 +238,8 @@
 
               <h3>Dontate</h3>
               <p>
-                If you are interested in donating to development, you can either
-                use the PayPal donation link above or buy the app on Google Play
+                If you are interested in donating to development, you can buy
+                the app on Google Play
               </p>
               <p>
                 &copy; Google Play and the Google Play logo are trademarks of

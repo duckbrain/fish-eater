@@ -156,16 +156,8 @@ export class Game {
 
   /** reset starts a new game. */
   reset() {
-    for (var i = 0; i < this.players.length; ++i) {
-      var p = this.players[i];
-      p.setController(NoOpFishController);
-      p.setPowerup(null);
-    }
+    this.endGame();
     this.gameOver = false;
-    this.players = [];
-    this.enemies = [];
-    this.drawablesTop = [this.water];
-    this.drawablesBottom = [this.sun];
     let f = new PlayerFish(this);
     f.size = 30;
     f.setController(this.interface.playerControls(this, 1));
@@ -173,7 +165,37 @@ export class Game {
     this.drawablesTop.push(new Status(f));
 
     this.setPaused(false);
-    this.setMusic(this.backgroundMusic);
+    this.setMusic(this.backgroundMusic, true);
+    this.interface.play();
+  }
+
+  demo() {
+    this.endGame();
+
+    // Add an invisible, untouchable player to run the game simulation
+    this.gameOver = false;
+    let f = new PlayerFish(this);
+    f.size = 30;
+    f.distanceTo = () => NaN;
+    f.draw = () => {};
+    this.players.push(f);
+    this.setMusic("");
+    this.setPaused(false);
+  }
+
+  endGame() {
+    for (var i = 0; i < this.players.length; ++i) {
+      var p = this.players[i];
+      p.setController(NoOpFishController);
+      p.setPowerup(null);
+    }
+    this.interface.pause();
+    this.gameOver = true;
+    this.players = [];
+    this.enemies = [];
+    this.drawablesTop = [this.water];
+    this.drawablesBottom = [this.sun];
+    this.interface.pause();
   }
 
   redraw() {

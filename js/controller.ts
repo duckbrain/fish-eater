@@ -44,8 +44,14 @@ export class GroupController extends PlayerController {
       this.down = Math.min(this.down + c.down, 1);
       this.left = Math.min(this.left + c.left, 1);
       this.right = Math.min(this.right + c.right, 1);
+
+      const tmp = { up: c.up, down: c.down, left: c.left, right: c.right };
       c.up = c.down = c.left = c.right = 0;
       c.apply(fish);
+      c.up = tmp.up;
+      c.down = tmp.down;
+      c.left = tmp.left;
+      c.right = tmp.right;
 
       if (c.depower) fish.setPowerup(null);
     });
