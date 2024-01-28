@@ -1,22 +1,29 @@
 <!doctype html>
-<html manifest="manifest.appcache">
+<html>
   <head>
     <title>Fish Eater</title>
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <link rel="apple-touch-icon" href="img/icon_96.png" />
     <link rel="icon" type="image/png" href="img/icon_16.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link rel="stylesheet" href="css/font-awesome.css" />
-    <link rel="stylesheet" href="css/intro.css" />
-    <script src="js/color.js"></script>
-    <script src="js/extras.js"></script>
-    <script src="js/intro.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="css/intro.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="module">
+      import { Game } from "./js/game";
+      import { Browser } from "./js/browser";
+
+      const game = new Game(new Browser());
+      game.reset();
+    </script>
   </head>
 
   <body>
-    <canvas id="background"></canvas>
-    <div id="water"></div>
-    <div id="master">
+    <canvas id="canvas"></canvas>
+    <div id="back">
+      <a href="index.html"><i class="fa fa-caret-square-o-left fa-3x"></i></a>
+    </div>
+    <div id="master" style="display: none">
       <div id="header">
         <img src="img/icon_128.png" />
         <h1>Fish Eater</h1>

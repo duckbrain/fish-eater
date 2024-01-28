@@ -1,20 +1,35 @@
-Color = function (r, g, b, a) {
-  this.r = r || 0;
-  this.g = g || 0;
-  this.b = b || 0;
-  this.a = a || 1;
-};
-Color.prototype = {
-  toString: function () {
+export interface HSV {
+  h: number;
+  s: number;
+  v: number;
+}
+
+export class Color {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
+
+  constructor(r?: number, g?: number, b?: number, a?: number) {
+    this.r = r || 0;
+    this.g = g || 0;
+    this.b = b || 0;
+    this.a = a || 1;
+  }
+
+  toString() {
     return "rgba(" + [this.r, this.g, this.b, this.a].join(",") + ")";
-  },
-  getHSV: function () {
-    var min, max, delta;
-    var hsv = {};
-    min = Math.min(this.r, this.g, this.b);
-    max = Math.max(this.r, this.g, this.b);
-    hsv.v = max / 255; // v
-    delta = max - min;
+  }
+
+  getHSV(): HSV {
+    const min = Math.min(this.r, this.g, this.b);
+    const max = Math.max(this.r, this.g, this.b);
+    const hsv: HSV = {
+      v: max / 255,
+      s: 0,
+      h: 0,
+    };
+    const delta = max - min;
     if (max != 0)
       hsv.s = delta / max; // s
     else {
@@ -31,26 +46,22 @@ Color.prototype = {
     hsv.h *= 60; // degrees
     if (hsv.h < 0) hsv.h += 360;
     return hsv;
-  },
-  setHSV: function (h, s, v) {
-    if (typeof h == "object") {
-      s = h.s;
-      v = h.v;
-      h = h.h;
-    }
+  }
 
-    var i, f, p, q, t;
+  setHSV(hsv: HSV): void {
+    let { h, s, v } = hsv;
+
     if (s == 0) {
       // achromatic (grey)
       this.r = this.g = this.b = v;
       return;
     }
     h /= 60; // sector 0 to 5
-    i = Math.floor(h);
-    f = h - i; // factorial part of h
-    p = v * (1 - s);
-    q = v * (1 - s * f);
-    t = v * (1 - s * (1 - f));
+    const i = Math.floor(h);
+    const f = h - i; // factorial part of h
+    const p = v * (1 - s);
+    const q = v * (1 - s * f);
+    const t = v * (1 - s * (1 - f));
     switch (i) {
       case 0:
         this.r = v;
@@ -86,5 +97,5 @@ Color.prototype = {
     this.r = Math.round(this.r * 255);
     this.g = Math.round(this.g * 255);
     this.b = Math.round(this.b * 255);
-  },
-};
+  }
+}

@@ -36,9 +36,7 @@ js/fish.js
 js/game.js
 js/intro.js
 js/keycontroller.js
-js/padcontroller.js
 js/playerfish.js
 js/powerups.js
-js/settings.js
 js/status.js
 js/touchcontroller.js

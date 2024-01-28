@@ -1,22 +1,31 @@
-Sun = function () {
-  this.rotation = 0;
-  this.interval = 0.01;
-  this.size = 30;
-  this.rayDist = 10;
-  this.rayLength = 30;
-  this.rayCount = 30;
-  this.x = 0;
-  this.y = 0;
+import { Color } from "./color";
+import { DrawingContext, Game } from "./game";
 
-  this.increment = function () {
+export class Sun {
+  game: Game;
+
+  rotation = 0;
+  interval = 0.01;
+  size = 30;
+  rayDist = 10;
+  rayLength = 30;
+  rayCount = 30;
+  x = 0;
+  y = 0;
+
+  constructor(game: Game) {
+    this.game = game;
+  }
+
+  increment() {
     this.rotation += this.interval;
-  };
-  this.draw = function (ctx) {
-    var p = game.transform(this.x, this.y, this.size);
+  }
+  draw(ctx: DrawingContext) {
+    var p = this.game.transform(this.x, this.y, this.size);
 
     ctx.fillStyle = "Yellow";
     ctx.strokeStyle = "Yellow";
-    ctx.lineWidth = 1 * game.scale;
+    ctx.lineWidth = 1 * this.game.scale;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.w, 0, Math.PI * 2, true);
     ctx.closePath();
@@ -29,39 +38,46 @@ Sun = function () {
     ) {
       ctx.moveTo(
         p.x +
-          Math.cos(theta + this.rotation) *
-            (this.size + this.rayDist) *
-            game.scale,
+        Math.cos(theta + this.rotation) *
+        (this.size + this.rayDist) *
+        this.game.scale,
         p.y +
-          Math.sin(theta + this.rotation) *
-            (this.size + this.rayDist) *
-            game.scale,
+        Math.sin(theta + this.rotation) *
+        (this.size + this.rayDist) *
+        this.game.scale,
       );
       ctx.lineTo(
         p.x +
-          Math.cos(theta + this.rotation) *
-            (this.size + this.rayDist + this.rayLength) *
-            game.scale,
+        Math.cos(theta + this.rotation) *
+        (this.size + this.rayDist + this.rayLength) *
+        this.game.scale,
         p.y +
-          Math.sin(theta + this.rotation) *
-            (this.size + this.rayDist + this.rayLength) *
-            game.scale,
+        Math.sin(theta + this.rotation) *
+        (this.size + this.rayDist + this.rayLength) *
+        this.game.scale,
       );
     }
 
     ctx.stroke();
-  };
-};
+  }
+}
 
-WaterLevel = function () {
-  this.targetWaterLevel = 100;
-  this.framesToNextChange = 0;
-  this.interval = 1;
-  this.color = new Color(0, 0, 255, 0.5);
-  this.hurtColor = new Color(255, 0, 0, 0.5);
-};
-WaterLevel.prototype = {
-  increment: function () {
+export class WaterLevel {
+  game: Game;
+
+  targetWaterLevel = 100;
+  framesToNextChange = 0;
+  interval = 1;
+  color = new Color(0, 0, 255, 0.5);
+  hurtColor = new Color(255, 0, 0, 0.5);
+
+  constructor(game: Game) {
+    this.game = game;
+  }
+
+  increment() {
+    const { game } = this;
+
     if (this.targetWaterLevel > game.waterLevel)
       game.waterLevel += this.interval;
     if (this.targetWaterLevel < game.waterLevel)
@@ -76,8 +92,10 @@ WaterLevel.prototype = {
       this.framesToNextChange <= 0
     )
       this.framesToNextChange = Math.random() * 300 + 30;
-  },
-  draw: function (ctx) {
+  }
+
+  draw(ctx: DrawingContext) {
+    const { game } = this;
     if (game.players.length == 1) {
       ctx.fillStyle = (
         game.players[0].hurt ? this.hurtColor : this.color
@@ -91,5 +109,5 @@ WaterLevel.prototype = {
       game.width * game.scale,
       game.height * game.scale - (game.yPan + game.waterLevel * game.scale),
     );
-  },
-};
+  }
+}
