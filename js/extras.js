@@ -40,14 +40,16 @@ WaterLevel = function() {
 }
 WaterLevel.prototype = {
 	increment: function() {
-		if (this.targetWaterLevel > game.waterLevel)
-			game.waterLevel += this.interval;
-		if (this.targetWaterLevel < game.waterLevel)
-			game.waterLevel -= this.interval;
-		if (this.targetWaterLevel == game.waterLevel && --this.framesToNextChange > 0)
+		var delta = this.targetWaterLevel - game.waterLevel;
+		if (Math.abs(delta) > this.interval) {
+			game.waterLevel += Math.sign(delta) * this.interval;
+			return;
+		}
+		game.waterLevel = this.targetWaterLevel;
+		if (--this.framesToNextChange <= 0) {
 			this.targetWaterLevel = Math.random() * game.height / 3;
-		if (this.targetWaterLevel == game.waterLevel && this.framesToNextChange <= 0)
-			this.framesToNextChange = Math.random() * 300 + 30
+			this.framesToNextChange = Math.random() * 300 + 30;
+		}
 	},
 	draw: function(ctx) {
 		if (game.players.length == 1) {
