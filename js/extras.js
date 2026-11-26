@@ -7,29 +7,28 @@ Sun = function() {
 	this.rayCount = 30;
 	this.x = 0;
 	this.y = 0;
-	
-	this.increment = function() {
-		this.rotation += this.interval;
-	}
-	this.draw = function(ctx) {
-		var p = game.transform(this.x, this.y, this.size);
-		
-		ctx.fillStyle = 'Yellow';
-		ctx.strokeStyle = 'Yellow';
-		ctx.lineWidth = 1 * game.scale;
-		ctx.beginPath();
-		ctx.arc(p.x, p.y, p.w, 0, Math.PI * 2, true);
-		ctx.closePath();
-		ctx.fill();
-
-		for (var theta = 0; theta < Math.PI * 2; theta = theta + Math.PI * 2 / this.rayCount) {
-			ctx.moveTo(p.x + Math.cos(theta + this.rotation) * (this.size + this.rayDist) * game.scale, p.y + Math.sin(theta + this.rotation) * (this.size + this.rayDist) * game.scale);
-			ctx.lineTo(p.x + Math.cos(theta + this.rotation) * (this.size + this.rayDist + this.rayLength) * game.scale, p.y + Math.sin(theta + this.rotation) * (this.size + this.rayDist + this.rayLength) * game.scale);
-		}
-
-		ctx.stroke();
-	}
 }
+Sun.prototype.increment = function() {
+    this.rotation += this.interval;
+}
+Sun.prototype.draw = function(ctx) {
+    var p = game.transform(this.x, this.y, this.size);
+    
+    ctx.fillStyle = 'Yellow';
+    ctx.strokeStyle = 'Yellow';
+    ctx.lineWidth = 1 * game.scale;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.w, 0, Math.PI * 2, true);
+    ctx.closePath();
+    ctx.fill();
+
+    for (var theta = 0; theta < Math.PI * 2; theta = theta + Math.PI * 2 / this.rayCount) {
+        ctx.moveTo(p.x + Math.cos(theta + this.rotation) * (this.size + this.rayDist) * game.scale, p.y + Math.sin(theta + this.rotation) * (this.size + this.rayDist) * game.scale);
+        ctx.lineTo(p.x + Math.cos(theta + this.rotation) * (this.size + this.rayDist + this.rayLength) * game.scale, p.y + Math.sin(theta + this.rotation) * (this.size + this.rayDist + this.rayLength) * game.scale);
+    }
+
+    ctx.stroke();
+} 
 
 WaterLevel = function() {
 	this.targetWaterLevel = 100;

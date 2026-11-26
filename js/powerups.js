@@ -209,8 +209,9 @@ PacManPowerUp.prototype.drawBody = function(ctx) {
 TimeStopPowerUp = function() {}
 TimeStopPowerUp.prototype = new PowerUp("\uf017 Time Stop", "timestop.mp3", 300);
 TimeStopPowerUp.prototype.init = function(fish) {
-	EnemyFish.prototype.__old_increment = EnemyFish.prototype.increment;
-	EnemyFish.prototype.increment = this.enemyIncrement;
+    this.disableIncrement(EnemyFish)
+    this.disableIncrement(WaterLevel)
+    this.disableIncrement(Sun)
 	var hsv = game.water.color.getHSV();
 	game.water.__old_color = {h:hsv.h, s:hsv.s, v:hsv.v};
 	hsv.s /= 2;
@@ -218,14 +219,21 @@ TimeStopPowerUp.prototype.init = function(fish) {
 	this.tick = 0;
 };
 TimeStopPowerUp.prototype.deinit = function(fish) {
-	EnemyFish.prototype.increment = EnemyFish.prototype.__old_increment;
-	delete EnemyFish.prototype.__old_increment;
+    this.enableIncrement(EnemyFish)
+    this.enableIncrement(WaterLevel)
+    this.enableIncrement(Sun)
 	game.water.color.setHSV(game.water.__old_color);
 	delete game.water.__old_color;
 };
-TimeStopPowerUp.prototype.enemyIncrement = function() {
-	
+TimeStopPowerUp.prototype.disableIncrement = function(obj) {
+	obj.prototype.__old_increment = obj.prototype.increment;
+    obj.prototype.increment = this.noop;
 }
+TimeStopPowerUp.prototype.enableIncrement = function(obj) {
+	obj.prototype.increment = obj.prototype.__old_increment;
+	delete obj.prototype.__old_increment;
+}
+TimeStopPowerUp.prototype.noop = function() { }
 
 //
 // Super Powerup
