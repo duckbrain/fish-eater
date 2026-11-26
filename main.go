@@ -147,7 +147,7 @@ func writeJSON(w http.ResponseWriter, v any) {
 func main() {
 	addr := flag.String("addr", ":8080", "listen address")
 	dataPath := flag.String("data", "scores.json", "path to the scores file")
-	origins := flag.String("origins", "https://duckbrain.github.io", "comma-separated CORS origins")
+	origins := flag.String("origins", "https://duckbrain.github.io,https://jonathan.duckfam.us", "comma-separated CORS origins")
 	flag.Parse()
 
 	board, err := loadBoard(*dataPath)

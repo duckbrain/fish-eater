@@ -1,5 +1,7 @@
 var leaderboard = (function() {
-	var sameOrigin = /^https?:$/.test(location.protocol) && location.hostname !== 'duckbrain.github.io';
+	// Only the Go server (main.go) serves /api; static hosts like GitHub or GitLab Pages use it cross-origin.
+	var sameOrigin = /^https?:$/.test(location.protocol) &&
+		['fish-eater.duckfam.us', 'localhost', '127.0.0.1'].indexOf(location.hostname) !== -1;
 	var url = (sameOrigin ? '' : 'https://fish-eater.duckfam.us') + '/api/scores';
 
 	function request(options) {
