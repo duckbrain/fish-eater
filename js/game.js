@@ -80,11 +80,13 @@ Game.prototype = {
 	win: function() {
 		this.gameOver = true;
 		this.setPaused("You Win!");
+		leaderboard.show(this.players[0]);
 		this.setMusic("win.mp3");
 	},
 	lose: function() {
 		this.gameOver = true;
 		this.setPaused("You Lose");
+		leaderboard.show(this.players[0]);
 		this.setMusic("lose.mp3");
 	},
 	
@@ -182,6 +184,7 @@ Game.prototype = {
 			p.setPowerup(null);
 		}
 		this.gameOver = false;
+		leaderboard.hide();
 		this.players = [];
 		this.enemies = [];
 		this.drawablesTop = [this.water];
@@ -208,7 +211,7 @@ Game.prototype = {
 			return;
 		
 		//Determine if a new fish needs to be added
-		if (game.enemies.length < 500 / this.smallestPlayer.size) {
+		if (!paused && game.enemies.length < 500 / this.smallestPlayer.size) {
 			this.newFish();
 		}
 		
@@ -239,7 +242,7 @@ Game.prototype = {
 			var f = this.enemies[i];
 			if (!paused)
 				f.increment();
-			for (j = 0; j < this.players.length; ++j) {
+			for (j = 0; !paused && j < this.players.length; ++j) {
 				player = this.players[j];
 				if (player.distanceTo(f) <= (player.size + f.size) / 2) {
 					f.onCollision(player);
