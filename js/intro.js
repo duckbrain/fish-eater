@@ -42,6 +42,11 @@ window.onload = function() {
 	}*/
 	
 	document.getElementById('water').style.background = game.water.color;
+
+	leaderboard.renderPersonal(document.getElementById('personal-list'));
+	var list = document.getElementById('leaderboard-list');
+	leaderboard.load().then(function(entries) { leaderboard.render(list, entries); },
+		function(err) { leaderboard.renderError(list, err); });
 }
 
 

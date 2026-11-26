@@ -12,6 +12,7 @@
     <script src="js/color.js"></script>
     <script src="js/extras.js"></script>
     <script src="js/intro.js"></script>
+    <script src="js/leaderboard.js"></script>
 </head>
 
 <body>
@@ -100,6 +101,18 @@
                             <li><i class="fa fa-li fa-bolt"></i> Super: This is the ultimate power-up, but can you make
                                 it last long enough?</li>
                         </ul>
+                    </div>
+                </div>
+
+                <div class="tab">
+                    <input type="radio" id="Leaderboard" name="tab-group">
+                    <label for="Leaderboard">Leaderboard</label>
+                    <div class="content">
+                        <h1>Leaderboard</h1>
+                        <h3>Your best</h3>
+                        <ol id="personal-list" class="leaderboard-list"></ol>
+                        <h3>Top 20</h3>
+                        <ol id="leaderboard-list" class="leaderboard-list"><li>Loading…</li></ol>
                     </div>
                 </div>
 
