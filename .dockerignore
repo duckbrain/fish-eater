@@ -1,3 +1,4 @@
 .git
+.gitlab-ci.yml
 Dockerfile
 scores.json
