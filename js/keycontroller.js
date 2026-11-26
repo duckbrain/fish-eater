@@ -5,19 +5,29 @@ function KeyController(preset) {
 		case "wasd":
 			this.keys = {
 				up: [ keys.w ],
-				down: [ keys.d ],
-				right: [ keys.r ],
-				left: [ keys.l ],
+				down: [ keys.s ],
+				right: [ keys.d ],
+				left: [ keys.a ],
 				pause: [ keys.esc, keys.space ],
 				depower: [ keys.t ]
 			};
+			break;
 		case "arrow":
-		default:
 			this.keys = {
 				up: [ keys.up ],
 				down: [ keys.down ],
 				right: [ keys.right ],
 				left: [ keys.left ],
+				pause: [ keys.esc, keys.space ],
+				depower: [ keys.t ]
+			};
+			break;
+		default: // single player: arrows and WASD
+			this.keys = {
+				up: [ keys.up, keys.w ],
+				down: [ keys.down, keys.s ],
+				right: [ keys.right, keys.d ],
+				left: [ keys.left, keys.a ],
 				pause: [ keys.esc, keys.space ],
 				depower: [ keys.t ]
 			};
