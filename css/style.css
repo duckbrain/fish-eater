@@ -22,3 +22,70 @@ canvas {
 	color:black;
 	text-decoration: none;
 }
+#leaderboard {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 34em;
+	max-width: calc(100% - 2em);
+	max-height: calc(100% - 2em);
+	overflow-y: auto;
+	box-sizing: border-box;
+	padding: 1em;
+	border-radius: 1em;
+	background: #111;
+	color: white;
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+#leaderboard h2 {
+	margin: 0 0 .5em;
+}
+
+#leaderboard form {
+	display: flex;
+	max-width: 20em;
+	margin: 0 auto;
+	gap: .5em;
+}
+
+#leaderboard input {
+	flex: 1;
+	min-width: 0;
+}
+
+#leaderboard .lists {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 1.5em;
+}
+
+#leaderboard section {
+	flex: 1 1 13em;
+}
+
+#leaderboard h3 {
+	margin: .5em 0 0;
+}
+
+#leaderboard ol {
+	text-align: left;
+	padding-left: 2em;
+}
+
+#leaderboard li .score {
+	float: right;
+}
+
+#leaderboard li.mine {
+	color: yellow;
+	font-weight: bold;
+}
+
+#leaderboard .again {
+	font-size: 120%;
+	padding: .3em 1em;
+}

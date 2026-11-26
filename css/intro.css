@@ -130,7 +130,7 @@ canvas#background {
 }
 .tab {
   float: left;
-  min-width: 33.333333%;
+  min-width: 25%;
 }
 .tab label {
   padding: 10px 0; 
@@ -163,4 +163,11 @@ canvas#background {
 }
 [type=radio]:checked ~ label ~ .content {
   display: block;
+}
+.leaderboard-list {
+  max-width: 20em;
+}
+
+.leaderboard-list .score {
+  float: right;
 }
