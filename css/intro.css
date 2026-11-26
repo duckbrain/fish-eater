@@ -123,14 +123,14 @@ canvas#background {
 }
 
 .tabs {
-  position: relative;   
+  display: flex;
+  position: relative;
   min-height: 700px; /* This part sucks */
   clear: both;
   margin: 25px 0;
 }
 .tab {
-  float: left;
-  min-width: 25%;
+  flex: 1;
 }
 .tab label {
   padding: 10px 0; 
